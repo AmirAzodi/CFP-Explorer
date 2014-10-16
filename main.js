@@ -2,6 +2,7 @@ $(document).ready(function() {
   var map;
   var markers = [];
   var lastValidCenter;
+  var oms;
   //sw,ne
   var strictBounds = new google.maps.LatLngBounds(
         new google.maps.LatLng(-85, -180),
@@ -20,17 +21,22 @@ $(document).ready(function() {
 
 
     map = new google.maps.Map(mapCanvas, mapOptions)
-
+    oms = new OverlappingMarkerSpiderfier(map);
     lastValidCenter = map.getCenter();
 
-    google.maps.event.addListener(map, 'center_changed', function() {
-        if (strictBounds.contains(map.getCenter())) {
-            // still within valid bounds, so save the last valid position
-            lastValidCenter = map.getCenter();
-            return;
-        }
-        // not valid anymore => return to last valid position
-        map.setCenter(lastValidCenter);
+    // google.maps.event.addListener(map, 'center_changed', function() {
+    //     if (strictBounds.contains(map.getCenter())) {
+    //         // still within valid bounds, so save the last valid position
+    //         lastValidCenter = map.getCenter();
+    //         return;
+    //     }
+    //     // not valid anymore => return to last valid position
+    //     map.setCenter(lastValidCenter);
+    // });
+    var iw = new google.maps.InfoWindow();
+    oms.addListener('click', function(marker, event) {
+      iw.setContent(marker.desc);
+      iw.open(map, marker);
     });
   }
 
@@ -39,10 +45,9 @@ $(document).ready(function() {
   function addMarker(marker, content) {
     marker.setAnimation(google.maps.Animation.DROP);
     marker.setMap(map);
-    google.maps.event.addListener(marker, 'click', function() {
-      new google.maps.InfoWindow({content: content}).open(map,marker);
-    });
+    marker.desc = content;
     markers.push(marker);
+    oms.addMarker(marker);
   }
 
   // Sets the map on all markers in the array.
@@ -192,7 +197,7 @@ $(document).ready(function() {
       } else if (confInfo.tier === "C") {
         if (type === "Journal") {iconType = "OK_J";} else {iconType = "OK_C";}
       } else {
-        if (type === "Journal") {iconType = "Unknown_J";} else {iconType = "Unknown_C";}
+        if (type === "Journal") {iconType = "OK_J";} else {iconType = "OK_C";}
       }
 
     } else {
@@ -210,7 +215,8 @@ $(document).ready(function() {
       '<b>Categories:</b> ' + conference["categories"];
 
     if (conference["lat"] == 0 && conference["lng"] == 0) {
-      location
+      $("#cool ul").append('<li>('+ type +') <a href="'+ conference["url"] +'" target="_blank">'+ conference["title"] +'</a></li>');
+      return;
     }
 
     var marker = new google.maps.Marker({
@@ -222,11 +228,13 @@ $(document).ready(function() {
   }
 
   $("#e1").click(function() {
+    $("#cool ul").empty();
     deleteMarkers();
     selectByConfTitle();
     selectByConfCategory();
   });
   $("#e2").click(function() {
+    $("#cool ul").empty();
     deleteMarkers();
     selectByConfTitle();
     selectByConfCategory();

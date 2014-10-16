@@ -129,14 +129,9 @@ $(document).ready(function() {
     $("#last_updated").html(db.last_updated);
     selector2 = $("#e2");
     var count = 0;
-    db.db.forEach(function(entry) {
-      entry.conferences.forEach(function(conf){
-        count = count + 1;
-        associativeArray[conf.title] = new Option(conf.title, conf.title);
-      });
-    });
-    for (var key in associativeArray){
-      selector2.append(associativeArray[key]);
+    for (var key in db.conferences) {
+      selector2.append(new Option(db.conferences[key].title, db.conferences[key].title));
+      count = count + 1;
     }
     $("#conference_count").html(count);
   });
@@ -153,73 +148,38 @@ $(document).ready(function() {
   });
 
   function selectByConfTitle () {
-    var step = 0
-    var sideStep = 0
-    var found = false
+    var type;
     $("#e2").select2("val").forEach(function(item) {
-      found = false;
-      for (var i = 0; i < db.db.length; i++) {
-        for (var x = 0; x < db.db[i].conferences.length; x++) {
-          var conference = db.db[i].conferences[x];
-          if (conference.title === item) {
-            iconType = "Conference"
-            var marker = undefined
-            if (conference.location == 'N/A' || conference.location == "Publication" || conference.location == "online") {
-              iconType = "Journal"
-            }
-            if (iconType == "Journal" || (conference.lat == 0 && conference.lng == 0)) {
-              step = step + 2;
-              if (step % 6 == 0) {
-                step = 0
-                sideStep = sideStep + 2;
-              }
-              makeMarker(iconType, conference, new google.maps.LatLng(35+step,-50+sideStep));
-            } else {
-              makeMarker(iconType, conference, new google.maps.LatLng(conference.lat, conference.lng));
-            }
-            found = true;
-            break;
-          }
-        }
-        if (found) {
-          break;
-        }
+      conference = db.conferences[item.toLowerCase()];
+      conf_location = conference["location"].toLowerCase();
+      type = "Conference"
+      if (conf_location === 'n/a' || conf_location === "publication" || conf_location === "online") {
+        type = "Journal"
       }
+      makeMarker(type, conference, new google.maps.LatLng(conference["lat"], conference["lng"]));
     });
   }
 
   function selectByConfCategory() {
-    var step = 0
-    var sideStep = 0
+    var type;
     $("#e1").select2("val").forEach(function(item) {
-      for (var i = 0; i < db.db.length; i++) {
-        if (db.db[i].name == item) {
-          for (var x = 0; x < db.db[i].conferences.length; x++) {
-            var conference = db.db[i].conferences[x];
-            var marker = undefined
-            var type = "Conference";
-            if (conference.lat == 0 && conference.lng == 0) {
-              step = step + 2;
-              if (step % 6 == 0) {
-                step = 0
-                sideStep = sideStep + 2;
-              }
-              if (conference.location === 'N/A' || conference.location === "Publication" || conference.location === "online") {
-                type = "Journal";
-              }
-              makeMarker(type, conference, new google.maps.LatLng(35+step,-50+sideStep));
-            } else {
-              makeMarker(type, conference, new google.maps.LatLng(conference.lat, conference.lng));
-            }
+      for (var key in db.conferences) {
+        conference = db.conferences[key];
+        if (!!~db.conferences[key].categories.indexOf(item)) {
+          conf_location = conference["location"].toLowerCase();
+          type = "Conference"
+          if (conf_location === 'n/a' || conf_location === "publication" || conf_location === "online") {
+            type = "Journal"
           }
-          break;
+          makeMarker(type, conference, new google.maps.LatLng(conference["lat"], conference["lng"]));
         }
       }
     });
   }
 
   function makeMarker(type, conference, location) {
-    var title = conference.title.toLowerCase().match(/\w+/)[0];
+
+    var title = conference["title"].toLowerCase().match(/\w+/)[0];
     var iconType;
     if (staticConferenceDB[title] != undefined) {
       var confInfo = staticConferenceDB[title];
@@ -232,8 +192,7 @@ $(document).ready(function() {
       } else if (confInfo.tier === "C") {
         if (type === "Journal") {iconType = "OK_J";} else {iconType = "OK_C";}
       } else {
-        if (type === "Journal") {iconType = "OK_J";} else {iconType = "OK_C";}
-        // if (type === "Journal") {iconType = "Unknown_J";} else {iconType = "Unknown_C";}
+        if (type === "Journal") {iconType = "Unknown_J";} else {iconType = "Unknown_C";}
       }
 
     } else {
@@ -242,12 +201,17 @@ $(document).ready(function() {
     }
 
     var contents = '<h4>' + type + '</h4>' +
-      '<b>Name: ' + conference.title + '</b> ' + info + '<br>' +
-      '<b>Submission Deadline:</b> ' + conference.submission + '<br>' +
-      '<b>Full Title:</b> ' + conference.full_title + '<br>' +
-      '<b>Location:</b> ' + conference.location + '<br>' +
-      '<b>Conference Date:</b> ' + conference.date + '<br>' +
-      '<b>URL:</b> ' + '<a target="_blank" href="'+ conference.url + '">' + conference.url + '</a>';
+      '<b>Name: ' + conference["title"] + '</b> ' + info + '<br>' +
+      '<b>Submission Deadline:</b> ' + conference["submission"] + '<br>' +
+      '<b>Full Title:</b> ' + conference["full_title"] + '<br>' +
+      '<b>Location:</b> ' + conference["location"] + '<br>' +
+      '<b>Conference Date:</b> ' + conference["date"] + '<br>' +
+      '<b>URL:</b> ' + '<a target="_blank" href="'+ conference["url"] + '">' + conference["url"] + '</a>' + '<br>' +
+      '<b>Categories:</b> ' + conference["categories"];
+
+    if (conference["lat"] == 0 && conference["lng"] == 0) {
+      location
+    }
 
     var marker = new google.maps.Marker({
       position: location,

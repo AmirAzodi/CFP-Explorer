@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>PhD Mate</title>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/3.5.0/select2.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery.colorbox/1.4.33/example4/colorbox.css">
+    <link rel="stylesheet" href="main.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+    <script src="https://maps.googleapis.com/maps/api/js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/3.5.0/select2.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.colorbox/1.4.33/jquery.colorbox-min.js"></script>
+    <script src="main.js"></script>
+  </head>
+  <body>
+
+    <div class="navbar navbar-fixed-top" role="navigation">
+      <div class="container phdmate-nav">
+        <div class="row">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">PhD Mate ;D</a>
+          </div>
+          <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav pull-left">
+              <li><a id="inline-whatisthis" href="#">What is this?</a></li>
+              <li><a id="inline-aboutus" href="#">About us</a></li>
+              <li><a id="inline-faq" href="#">FAQ</a></li>
+            </ul>
+            <ul class="nav navbar-nav pull-right">
+              <li class="last_updated">
+                Last updated:&nbsp;<span id="last_updated"></span>
+              </li>
+              <li class="last_updated">
+                Number of Conferences:&nbsp;<span id="conference_count"></span>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="row">
+          <select multiple id="e1"></select>
+          <select multiple id="e2"></select>
+        </div>
+      </div>
+    </div>
+    <div id="map_canvas"></div>
+  </body>
+</html>

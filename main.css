@@ -1,0 +1,45 @@
+html, body {
+  height:100%;
+  width:100%;
+}
+
+.navbar {
+  margin-bottom: 0px !important;
+}
+
+.select2-container {
+  width:100%;
+  min-width: 300px;
+  padding-left: 1px;
+  padding-right: 1px;
+  max-width: 567px;
+  padding-top: 8px;
+}
+
+#map_canvas {
+  min-height: 100%
+  width: auto;
+  height: 100%;
+}
+
+#cboxOverlay {
+  background: rgba(0,0,0,0) !important;
+  opacity: 0.3 !important;
+}
+
+.popup {
+  max-width: 750px;
+}
+
+.last_updated {
+  padding: 15px;
+  color: #428bca;
+}
+
+.phdmate-nav {
+  padding-left: 30px;
+  padding-right: 30px;
+  opacity: 0.9;
+  background-color: pink;
+  padding-bottom: 10px;
+}

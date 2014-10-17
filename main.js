@@ -1,6 +1,13 @@
+// https://maps.google.com/mapfiles/ms/icons/red-dot.png
+// https://maps.google.com/mapfiles/ms/icons/purple-dot.png
+// https://maps.google.com/mapfiles/ms/icons/blue-dot.png
+// https://maps.google.com/mapfiles/ms/icons/yellow-dot.png
+// https://maps.google.com/mapfiles/ms/icons/green-dot.png
+
 $(document).ready(function() {
   var map;
   var markers = [];
+  var markers2 = [];
   var lastValidCenter;
   var oms;
   //sw,ne
@@ -42,35 +49,49 @@ $(document).ready(function() {
 
 
   // Add a marker to the map and push to the array.
-  function addMarker(marker, content) {
+  function addMarker(marker, content, arrayId) {
     marker.setAnimation(google.maps.Animation.DROP);
     marker.setMap(map);
     marker.desc = content;
-    markers.push(marker);
+    if (arrayId == 1) {
+      markers.forEach(function() {
+
+      });
+      markers.push(marker);
+    } else if (arrayId == 2) {
+      markers2.push(marker);
+    }
     oms.addMarker(marker);
   }
 
   // Sets the map on all markers in the array.
-  function setAllMap(map) {
+  function setAllMap(map,markers) {
     for (var i = 0; i < markers.length; i++) {
       markers[i].setMap(map);
     }
   }
 
   // Removes the markers from the map, but keeps them in the array.
-  function clearMarkers() {
-    setAllMap(null);
+  function clearMarkers(markers) {
+    setAllMap(null,markers);
   }
+
 
   // Shows any markers currently in the array.
   function showMarkers() {
-    setAllMap(map);
+    setAllMap(map,markers);
+    setAllMap(map,markers2);
   }
 
   // Deletes all markers in the array by removing references to them.
-  function deleteMarkers() {
-    clearMarkers();
+  function deleteCategoryMarkers() {
+    clearMarkers(markers);
     markers = [];
+  }
+
+  function deleteTitleMarkers() {
+    clearMarkers(markers2);
+    markers2 = [];
   }
 
   google.maps.event.addDomListener(window, 'load', initialize);
@@ -95,32 +116,44 @@ $(document).ready(function() {
   $("#e2").select2({
     placeholder: "Select a Conference",
     allowClear: true
+  }).on("select2-removing", function(e) {
+    $("#cool div label").each(function() {
+      var my = $(this);
+      if (my.text().toLowerCase().trim() === e.val.toLowerCase().trim()) {
+        my.remove();
+        return false;
+      }
+    });
   });
+  // .on("select2-selecting", function(e) {
+  //   deleteTitleMarkers();
+  //   selectByConfTitle();
+  // });
 
   var icons = {
     Unknown_C: {
-      icon: 'img/uc.png'
+      icon: 'https://maps.google.com/mapfiles/ms/icons/purple-dot.png'
     },
     Unknown_J: {
-      icon: 'img/uj.png'
+      icon: 'https://maps.google.com/mapfiles/ms/icons/purple-dot.png'
     },
     OK_C: {
-      icon: 'img/oc.png'
+      icon: 'https://maps.google.com/mapfiles/ms/icons/blue-dot.png'
     },
     OK_J: {
-      icon: 'img/oj.png'
+      icon: 'https://maps.google.com/mapfiles/ms/icons/blue-dot.png'
     },
     Good_C: {
-      icon: 'img/gc.png'
+      icon: 'https://maps.google.com/mapfiles/ms/icons/yellow-dot.png'
     },
     Good_J: {
-      icon: 'img/gj.png'
+      icon: 'https://maps.google.com/mapfiles/ms/icons/yellow-dot.png'
     },
     Top_C: {
-      icon: 'img/tc.png'
+      icon: 'https://maps.google.com/mapfiles/ms/icons/green-dot.png'
     },
     Top_J: {
-      icon: 'img/tj.png'
+      icon: 'https://maps.google.com/mapfiles/ms/icons/green-dot.png'
     }
   };
 
@@ -152,19 +185,6 @@ $(document).ready(function() {
     staticConferenceDB = data["conferences"];
   });
 
-  function selectByConfTitle () {
-    var type;
-    $("#e2").select2("val").forEach(function(item) {
-      conference = db.conferences[item.toLowerCase()];
-      conf_location = conference["location"].toLowerCase();
-      type = "Conference"
-      if (conf_location === 'n/a' || conf_location === "publication" || conf_location === "online") {
-        type = "Journal"
-      }
-      makeMarker(type, conference, new google.maps.LatLng(conference["lat"], conference["lng"]));
-    });
-  }
-
   function selectByConfCategory() {
     var type;
     $("#e1").select2("val").forEach(function(item) {
@@ -176,13 +196,54 @@ $(document).ready(function() {
           if (conf_location === 'n/a' || conf_location === "publication" || conf_location === "online") {
             type = "Journal"
           }
-          makeMarker(type, conference, new google.maps.LatLng(conference["lat"], conference["lng"]));
+          makeMarker(type, conference, new google.maps.LatLng(conference["lat"], conference["lng"]), 1);
         }
       }
     });
   }
 
-  function makeMarker(type, conference, location) {
+  function selectByConfTitle () {
+    var type;
+    $("#e2").select2("val").forEach(function(item) {
+      conference = db.conferences[item.toLowerCase()];
+      conf_location = conference["location"].toLowerCase();
+      type = "Conference"
+      if (conf_location === 'n/a' || conf_location === "publication" || conf_location === "online") {
+        type = "Journal"
+      }
+      makeMarker(type, conference, new google.maps.LatLng(conference["lat"], conference["lng"]),2);
+    });
+  }
+
+  function addToList(type, conference) {
+    var shouldAdd = true;
+    if (type === "Journal") {
+      $("#cool div label").each(function() {
+        var my = $(this);
+        if (my.text().toLowerCase().trim() === conference["title"].toLowerCase().trim()) {
+          shouldAdd = false;
+          return;
+        }
+      });
+      if (shouldAdd) {
+        $("#stranded_confs").append('<label class="btn btn-primary">'+ conference["title"] +'</label>');
+      }
+    } else if (type === "Conference") {
+      $("#cool div label").each(function() {
+        var my = $(this);
+        if (my.text().toLowerCase().trim() === conference["title"].toLowerCase().trim()) {
+          shouldAdd = false;
+          return;
+        }
+      });
+      if (shouldAdd) {
+        $("#stranded_journals").append('<label class="btn btn-primary">'+ conference["title"] +'</label>');
+      }
+    }
+    $("#cool").show();
+  }
+
+  function makeMarker(type, conference, location, arrayId) {
 
     var title = conference["title"].toLowerCase().match(/\w+/)[0];
     var iconType;
@@ -215,7 +276,7 @@ $(document).ready(function() {
       '<b>Categories:</b> ' + conference["categories"];
 
     if (conference["lat"] == 0 && conference["lng"] == 0) {
-      $("#cool ul").append('<li>('+ type +') <a href="'+ conference["url"] +'" target="_blank">'+ conference["title"] +'</a></li>');
+      addToList(type, conference);
       return;
     }
 
@@ -223,20 +284,27 @@ $(document).ready(function() {
       position: location,
       icon: icons[iconType].icon
     });
-
-    addMarker(marker,contents);
+    addMarker(marker,contents,arrayId);
   }
 
   $("#e1").click(function() {
-    $("#cool ul").empty();
-    deleteMarkers();
-    selectByConfTitle();
+    $("#cool div").empty();
+    deleteCategoryMarkers();
     selectByConfCategory();
+    if ($("#cool div label").length == 0) {
+      $("#cool").hide();
+    }
   });
+
   $("#e2").click(function() {
-    $("#cool ul").empty();
-    deleteMarkers();
+    deleteTitleMarkers();
     selectByConfTitle();
-    selectByConfCategory();
+    if ($("#cool div label").length == 0) {
+      $("#cool").hide();
+    }
+    // if ($("#cool div").length == 0) {
+    //   console.log("HELO");
+    //   $("#cool div").hide();
+    // }
   });
 });

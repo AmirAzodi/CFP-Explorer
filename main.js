@@ -242,7 +242,12 @@ $(document).ready(function() {
         }
       });
       if (shouldAdd) {
-        $("#stranded_confs").append('<label class="btn btn-primary">'+ conference["title"] +'</label>');
+
+        $("#stranded_confs").append('<label class="btn btn-default"><a href="'+
+          conference["url"] +
+          '" target="_blank">' +
+          conference["title"] +
+          '</a></label>');
       }
     } else if (type === "Conference") {
       $("#cool div label").each(function() {
@@ -253,7 +258,11 @@ $(document).ready(function() {
         }
       });
       if (shouldAdd) {
-        $("#stranded_journals").append('<label class="btn btn-primary">'+ conference["title"] +'</label>');
+        $("#stranded_journals").append('<label class="btn btn-default"><a href="' +
+          conference["url"] +
+          '" target="_blank">' +
+          conference["title"] +
+          '</a></label>');
       }
     }
     $("#cool").show();

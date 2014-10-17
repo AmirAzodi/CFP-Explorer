@@ -53,15 +53,31 @@ $(document).ready(function() {
     marker.setAnimation(google.maps.Animation.DROP);
     marker.setMap(map);
     marker.desc = content;
+    var shouldAdd = true;
     if (arrayId == 1) {
-      markers.forEach(function() {
-
+      markers.forEach(function(item) {
+        if (item.title == marker.title) {
+          shouldAdd = false;
+          return;
+        }
       });
-      markers.push(marker);
+      if (shouldAdd) {
+        markers.push(marker);
+      }
     } else if (arrayId == 2) {
-      markers2.push(marker);
+      markers2.forEach(function(item) {
+        if (item.title == marker.title) {
+          shouldAdd = false;
+          return;
+        }
+      });
+      if (shouldAdd) {
+        markers2.push(marker);
+      }
     }
-    oms.addMarker(marker);
+    if (shouldAdd) {
+      oms.addMarker(marker);
+    }
   }
 
   // Sets the map on all markers in the array.
@@ -282,7 +298,8 @@ $(document).ready(function() {
 
     var marker = new google.maps.Marker({
       position: location,
-      icon: icons[iconType].icon
+      icon: icons[iconType].icon,
+      title: conference["title"].trim().toLowerCase()
     });
     addMarker(marker,contents,arrayId);
   }

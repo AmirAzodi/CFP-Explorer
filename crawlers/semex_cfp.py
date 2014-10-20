@@ -63,14 +63,14 @@ def run(repo, db):
             cfps[cfpIdentifier] = {}
             cfps[cfpIdentifier]["submission"] = deadline
             cfps[cfpIdentifier]["url"] = url
-            cfps[cfpIdentifier]["date"] = "unknown"
+            cfps[cfpIdentifier]["date"] = "Unknown"
             cfps[cfpIdentifier]["title"] = titles[title_num].replace('\'',' 20')
             cfps[cfpIdentifier]["full_title"] = full_title
             cfps[cfpIdentifier]["location"] = location
 
             cfps[cfpIdentifier]["lat"] = 0
             cfps[cfpIdentifier]["lng"] = 0
-            cfps[cfpIdentifier]["categories"] = []
+            cfps[cfpIdentifier]["categories"] = ['computer science']
             if location.lower() not in invalid_locations:
                 #print location.lower()
                 userdata = {"address": location.strip(), "key": google_maps_api_key}
@@ -97,7 +97,7 @@ def run(repo, db):
 
         else:
             confDict = {}
-            confDict["ranking"] = 0
+            confDict["ranking"] = 'Unknown'
             confDict["full_title"] = title
             confDict["type"] = publisher
             confDict["tier"] = rank

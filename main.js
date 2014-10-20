@@ -1,27 +1,17 @@
-// https://maps.google.com/mapfiles/ms/icons/red-dot.png
-// https://maps.google.com/mapfiles/ms/icons/purple-dot.png
-// https://maps.google.com/mapfiles/ms/icons/blue-dot.png
-// https://maps.google.com/mapfiles/ms/icons/yellow-dot.png
-// https://maps.google.com/mapfiles/ms/icons/green-dot.png
-
 $(document).ready(function() {
   var map;
   var markers = [];
   var markers2 = [];
   var lastValidCenter;
   var oms;
-  //sw,ne
-  var strictBounds = new google.maps.LatLngBounds(
-        new google.maps.LatLng(-85, -180),
-        new google.maps.LatLng(85, 180));
 
   function initialize() {
 
     var mapCanvas = document.getElementById('map_canvas');
     var mapOptions = {
       center: new google.maps.LatLng(38.150160, 12.728289),
-      minZoom:3,
-      zoom:3,
+      // minZoom:3,
+      zoom:4,
       mapTypeId: google.maps.MapTypeId.ROADMAP,
       styles: [{"featureType":"administrative","elementType":"all","stylers":[{"visibility":"on"},{"saturation":-100},{"lightness":20}]},{"featureType":"road","elementType":"all","stylers":[{"visibility":"on"},{"saturation":-100},{"lightness":40}]},{"featureType":"water","elementType":"all","stylers":[{"visibility":"on"},{"saturation":-10},{"lightness":30}]},{"featureType":"landscape.man_made","elementType":"all","stylers":[{"visibility":"simplified"},{"saturation":-60},{"lightness":10}]},{"featureType":"landscape.natural","elementType":"all","stylers":[{"visibility":"simplified"},{"saturation":-60},{"lightness":60}]},{"featureType":"poi","elementType":"all","stylers":[{"visibility":"off"},{"saturation":-100},{"lightness":60}]},{"featureType":"transit","elementType":"all","stylers":[{"visibility":"off"},{"saturation":-100},{"lightness":60}]}]
     };
@@ -31,22 +21,12 @@ $(document).ready(function() {
     oms = new OverlappingMarkerSpiderfier(map);
     lastValidCenter = map.getCenter();
 
-    // google.maps.event.addListener(map, 'center_changed', function() {
-    //     if (strictBounds.contains(map.getCenter())) {
-    //         // still within valid bounds, so save the last valid position
-    //         lastValidCenter = map.getCenter();
-    //         return;
-    //     }
-    //     // not valid anymore => return to last valid position
-    //     map.setCenter(lastValidCenter);
-    // });
     var iw = new google.maps.InfoWindow();
     oms.addListener('click', function(marker, event) {
       iw.setContent(marker.desc);
       iw.open(map, marker);
     });
   }
-
 
   // Add a marker to the map and push to the array.
   function addMarker(marker, content, arrayId) {
@@ -141,35 +121,22 @@ $(document).ready(function() {
       }
     });
   });
-  // .on("select2-selecting", function(e) {
-  //   deleteTitleMarkers();
-  //   selectByConfTitle();
-  // });
 
   var icons = {
-    Unknown_C: {
-      icon: 'https://maps.google.com/mapfiles/ms/icons/purple-dot.png'
+    UNKNOWN: {
+      icon: 'https://maps.google.com/mapfiles/ms/icons/pink.png'
     },
-    Unknown_J: {
-      icon: 'https://maps.google.com/mapfiles/ms/icons/purple-dot.png'
+    KNOWN: {
+      icon: 'https://maps.google.com/mapfiles/ms/icons/blue.png'
     },
-    OK_C: {
-      icon: 'https://maps.google.com/mapfiles/ms/icons/blue-dot.png'
+    OK: {
+      icon: 'https://maps.google.com/mapfiles/ms/icons/yellow.png'
     },
-    OK_J: {
-      icon: 'https://maps.google.com/mapfiles/ms/icons/blue-dot.png'
+    GOOD: {
+      icon: 'https://maps.google.com/mapfiles/ms/icons/orange.png'
     },
-    Good_C: {
-      icon: 'https://maps.google.com/mapfiles/ms/icons/yellow-dot.png'
-    },
-    Good_J: {
-      icon: 'https://maps.google.com/mapfiles/ms/icons/yellow-dot.png'
-    },
-    Top_C: {
-      icon: 'https://maps.google.com/mapfiles/ms/icons/green-dot.png'
-    },
-    Top_J: {
-      icon: 'https://maps.google.com/mapfiles/ms/icons/green-dot.png'
+    TOP: {
+      icon: 'https://maps.google.com/mapfiles/ms/icons/green.png'
     }
   };
 
@@ -231,39 +198,34 @@ $(document).ready(function() {
     });
   }
 
-  function addToList(type, conference) {
+  function addToList(type, conference, contents) {
     var shouldAdd = true;
-    if (type === "Journal") {
-      $("#cool div label").each(function() {
-        var my = $(this);
-        if (my.text().toLowerCase().trim() === conference["title"].toLowerCase().trim()) {
-          shouldAdd = false;
-          return;
-        }
-      });
-      if (shouldAdd) {
-
-        $("#stranded_confs").append('<label class="btn btn-default"><a href="'+
-          conference["url"] +
-          '" target="_blank">' +
-          conference["title"] +
-          '</a></label>');
+    $("#cool div label").each(function() {
+      var my = $(this);
+      if (my.text().toLowerCase().trim() === conference["title"].toLowerCase().trim()) {
+        shouldAdd = false;
+        return;
       }
-    } else if (type === "Conference") {
-      $("#cool div label").each(function() {
-        var my = $(this);
-        if (my.text().toLowerCase().trim() === conference["title"].toLowerCase().trim()) {
-          shouldAdd = false;
-          return;
-        }
-      });
-      if (shouldAdd) {
-        $("#stranded_journals").append('<label class="btn btn-default"><a href="' +
-          conference["url"] +
-          '" target="_blank">' +
-          conference["title"] +
-          '</a></label>');
+    });
+    if (shouldAdd) {
+      var listToAddTo;
+      if (type === "Conference") {
+        listToAddTo = $("#stranded_confs")
+      } else {
+        listToAddTo = $("#stranded_journals")
       }
+      listToAddTo.append(
+          $('<label>')
+            .attr('class', 'list-group-item')
+            .append(
+              $('<a>')
+                // .attr('href', "#")
+                .attr('target', "_blank")
+                .append(conference["title"]))
+            .click(function(){
+              $.colorbox({html:contents});
+            })
+            );
     }
     $("#cool").show();
   }
@@ -277,17 +239,19 @@ $(document).ready(function() {
       var info = '(<b>Type:</b> ' + confInfo.type + ', ' + '<b>Ranking:</b> ' + confInfo.ranking + ', ' + '<b>Tier:</b> ' + confInfo.tier + ')';
 
       if (confInfo.tier === "A") {
-        if (type === "Journal") {iconType = "Top_J";} else {iconType = "Top_C";}
+        iconType = "TOP";
       } else if (confInfo.tier === "B") {
-        if (type === "Journal") {iconType = "Good_J";} else {iconType = "Good_C";}
+        iconType = "GOOD";
       } else if (confInfo.tier === "C") {
-        if (type === "Journal") {iconType = "OK_J";} else {iconType = "OK_C";}
+        iconType = "OK";
+      } else if (confInfo.ranking != "Unknown"){
+        iconType = "KNOWN";
       } else {
-        if (type === "Journal") {iconType = "OK_J";} else {iconType = "OK_C";}
+        iconType = "UNKNOWN";
       }
 
     } else {
-      if (type === "Journal") {iconType = "Unknown_J";} else {iconType = "Unknown_C";}
+      iconType = "UNKNOWN";
       var info = '(<b>Type:</b> Unknown, ' + '<b>Ranking:</b> Unknown, ' + '<b>Tier:</b> Unknown)';
     }
 
@@ -301,7 +265,7 @@ $(document).ready(function() {
       '<b>Categories:</b> ' + conference["categories"];
 
     if (conference["lat"] == 0 && conference["lng"] == 0) {
-      addToList(type, conference);
+      addToList(type, conference, contents);
       return;
     }
 
@@ -328,9 +292,5 @@ $(document).ready(function() {
     if ($("#cool div label").length == 0) {
       $("#cool").hide();
     }
-    // if ($("#cool div").length == 0) {
-    //   console.log("HELO");
-    //   $("#cool div").hide();
-    // }
   });
 });

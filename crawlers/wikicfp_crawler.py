@@ -1,8 +1,6 @@
 import requests
 from scrapy.http import HtmlResponse
 import re, json
-# from conference import *
-from category import *
 import cgi
 import datetime
 
@@ -62,8 +60,11 @@ def parseWikiCFP(OLD_DATASTORE, cat):
               response = requests.get(gMapsURL, params=userdata)
 
               if 'OK' == response.json()["status"]:
-                conf_loc_info = response.json()["results"][0]["geometry"]["location"]
-                conference = pSucks(conf_title, conf_full_title, conf_url, conf_date, conf_location, conf_submission, conf_loc_info["lat"], conf_loc_info["lng"], cat)
+                result = response.json()["results"][0]
+                conf_loc_info = rresult["geometry"]["location"]
+                country = result["formatted_address"][result["formatted_address"].rfind(','):]
+                conference = pSucks(conf_title,conf_full_title,conf_url,conf_date,conf_location,conf_submission,conf_loc_info["lat"],conf_loc_info["lng"],cat,country)
+                print country
               else:
                 print response.json()
                 raise Exception()
@@ -73,13 +74,13 @@ def parseWikiCFP(OLD_DATASTORE, cat):
           except Exception, e:
             if e.message:
               print e
-            conference = pSucks(conf_title, conf_full_title, conf_url, conf_date, conf_location, conf_submission, 0, 0, cat)
+            conference = pSucks(conf_title, conf_full_title, conf_url, conf_date, conf_location, conf_submission, 0, 0, cat, "Unknown")
           conferences[conf_title_key] = conference
       if finished: break
     except Exception, e:
       print e
 
-def pSucks(conf_title,conf_full_title,conf_url,conf_date,conf_location,conf_submission,lat,lng, category):
+def pSucks(conf_title,conf_full_title,conf_url,conf_date,conf_location,conf_submission,lat,lng, category, country):
   confDict = {}
   confDict["title"] = conf_title
   confDict["full_title"] = conf_full_title
@@ -90,6 +91,7 @@ def pSucks(conf_title,conf_full_title,conf_url,conf_date,conf_location,conf_subm
   confDict["lat"] = lat
   confDict["lng"] = lng
   confDict["categories"] = [category]
+  confDict["country"] = country
   return confDict
 
 def main():

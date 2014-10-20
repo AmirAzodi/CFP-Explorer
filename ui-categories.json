@@ -1,0 +1,893 @@
+{
+  "categories": {
+    "Computer Science": [
+      "computer science"
+    ],
+    "Network Security": [
+      "network security"
+    ],
+    "Power Electronics": [
+      "power electronics"
+    ],
+    "Artificial Intelligence": [
+      "artificial intelligence",
+      "AI"
+    ],
+    "Natural Language Processing": [
+      "natural language processing"
+    ],
+    "Human Computer Interaction": [
+      "human computer interaction",
+      "HCI"
+    ],
+    "Communications": [
+      "communications"
+    ],
+    "Innovation": [
+      "innovation"
+    ],
+    "Cybernetics": [
+      "cybernetics"
+    ],
+    "Security": [
+      "security"
+    ],
+    "Electrical Engineering": [
+      "electrical engineering"
+    ],
+    "Linked Data": [
+      "linked data"
+    ],
+    "Software Engineering": [
+      "software engineering"
+    ],
+    "Mechatronics": [
+      "mechatronics"
+    ],
+    "Theory": [
+      "theory"
+    ],
+    "Data Mining": [
+      "data mining"
+    ],
+    "Soft Computing": [
+      "soft computing"
+    ],
+    "Social": [
+      "social"
+    ],
+    "Engineering": [
+      "engineering"
+    ],
+    "Verification": [
+      "verification"
+    ],
+    "Testing": [
+      "testing"
+    ],
+    "Networking": [
+      "networking"
+    ],
+    "Agents": [
+      "agents"
+    ],
+    "Telecommunication": [
+      "telecommunication"
+    ],
+    "Machine Learning": [
+      "machine learning"
+    ],
+    "Manufacturing": [
+      "manufacturing"
+    ],
+    "Text Mining": [
+      "text mining"
+    ],
+    "Neuro-linguistic Programming": [
+      "NLP"
+    ],
+    "Nanotechnology": [
+      "nanotechnology"
+    ],
+    "Graphics": [
+      "graphics"
+    ],
+    "Education": [
+      "education"
+    ],
+    "Cloud": [
+      "cloud"
+    ],
+    "Databases": [
+      "databases"
+    ],
+    "Internet Of Things": [
+      "internet of things"
+    ],
+    "Speech": [
+      "speech"
+    ],
+    "Signal Processing": [
+      "signal processing"
+    ],
+    "Research": [
+      "research"
+    ],
+    "Technologies": [
+      "technologies"
+    ],
+    "Information Technology": [
+      "information technology"
+    ],
+    "Computer Engineering": [
+      "computer engineering"
+    ],
+    "Medical Imaging": [
+      "medical imaging"
+    ],
+    "Multimedia": [
+      "multimedia"
+    ],
+    "Computational Biology": [
+      "computational biology"
+    ],
+    "Compilers": [
+      "compilers"
+    ],
+    "Management": [
+      "management"
+    ],
+    "Cryptography": [
+      "cryptography"
+    ],
+    "Music": [
+      "music"
+    ],
+    "Image Processing": [
+      "image processing"
+    ],
+    "Finance": [
+      "finance"
+    ],
+    "Software Testing": [
+      "software testing"
+    ],
+    "Robotics": [
+      "robotics"
+    ],
+    "Social Science": [
+      "social science"
+    ],
+    "Microwave": [
+      "microwave"
+    ],
+    "Wireless": [
+      "wireless"
+    ],
+    "Logic": [
+      "logic"
+    ],
+    "Pedagogy": [
+      "pedagogy"
+    ],
+    "Cloud Computing": [
+      "cloud computing"
+    ],
+    "Computational Linguistics": [
+      "computational linguistics"
+    ],
+    "Industry": [
+      "industry"
+    ],
+    "Information Retrieval": [
+      "information retrieval"
+    ],
+    "History": [
+      "history"
+    ],
+    "Cyber-physical Systems": [
+      "cyber-physical systems"
+    ],
+    "Technology": [
+      "technology"
+    ],
+    "Sensors": [
+      "sensors"
+    ],
+    "System": [
+      "system"
+    ],
+    "Bioinformatics": [
+      "bioinformatics"
+    ],
+    "Cultural Studies": [
+      "cultural studies"
+    ],
+    "Performance": [
+      "performance"
+    ],
+    "Web": [
+      "web"
+    ],
+    "Trust": [
+      "trust"
+    ],
+    "Industry Applications": [
+      "industry applications"
+    ],
+    "Biometrics": [
+      "biometrics"
+    ],
+    "Photonics": [
+      "photonics"
+    ],
+    "Control": [
+      "control"
+    ],
+    "Mechanical Engineering": [
+      "mechanical engineering"
+    ],
+    "Health Informatics": [
+      "health informatics"
+    ],
+    "Communication": [
+      "communication"
+    ],
+    "Culture": [
+      "culture"
+    ],
+    "Workshop": [
+      "workshop"
+    ],
+    "Simulation": [
+      "simulation"
+    ],
+    "Telecommunications": [
+      "telecommunications"
+    ],
+    "Antennas": [
+      "antennas"
+    ],
+    "Computer": [
+      "computer"
+    ],
+    "Semantics": [
+      "semantics"
+    ],
+    "Semantic Web": [
+      "semantic web"
+    ],
+    "Biomedical": [
+      "biomedical"
+    ],
+    "Software Architecture": [
+      "software architecture"
+    ],
+    "Computer Vision": [
+      "computer vision"
+    ],
+    "Life Sciences": [
+      "life sciences"
+    ],
+    "Political Science": [
+      "political science"
+    ],
+    "Information Systems": [
+      "information systems"
+    ],
+    "Evolutionary Computation": [
+      "evolutionary computation"
+    ],
+    "Safety": [
+      "safety"
+    ],
+    "Software": [
+      "software"
+    ],
+    "Data Management": [
+      "data management"
+    ],
+    "Dependability": [
+      "dependability"
+    ],
+    "Linguistics": [
+      "linguistics"
+    ],
+    "Computer Networks": [
+      "computer networks"
+    ],
+    "Entrepreneurship": [
+      "entrepreneurship"
+    ],
+    "Modeling": [
+      "modeling"
+    ],
+    "Wireless Communications": [
+      "wireless communications"
+    ],
+    "Business Intelligence": [
+      "business intelligence"
+    ],
+    "Business": [
+      "business"
+    ],
+    "Cognitive Science": [
+      "cognitive science"
+    ],
+    "Ontologies": [
+      "ontologies"
+    ],
+    "Embedded Systems": [
+      "embedded systems"
+    ],
+    "Law": [
+      "law"
+    ],
+    "Power Engineering": [
+      "power engineering"
+    ],
+    "Networks": [
+      "networks"
+    ],
+    "Informatics": [
+      "informatics"
+    ],
+    "Logistics": [
+      "logistics"
+    ],
+    "Computational Intelligence": [
+      "computational intelligence"
+    ],
+    "Marketing": [
+      "marketing"
+    ],
+    "Neuroscience": [
+      "neuroscience"
+    ],
+    "Economics": [
+      "economics"
+    ],
+    "Medicine": [
+      "medicine"
+    ],
+    "Programming": [
+      "programming"
+    ],
+    "Systems": [
+      "systems"
+    ],
+    "Sociology": [
+      "sociology"
+    ],
+    "Green Computing": [
+      "green computing"
+    ],
+    "Automation": [
+      "automation"
+    ],
+    "Neural Networks": [
+      "neural networks"
+    ],
+    "It": [
+      "IT"
+    ],
+    "Distributed Systems": [
+      "distributed systems"
+    ],
+    "Games": [
+      "games"
+    ],
+    "Ubiquitous": [
+      "ubiquitous"
+    ],
+    "Science": [
+      "science"
+    ],
+    "E-commerce": [
+      "e-commerce"
+    ],
+    "Molecular Biology": [
+      "molecular biology"
+    ],
+    "Privacy": [
+      "privacy"
+    ],
+    "Database": [
+      "database"
+    ],
+    "Systems Engineering": [
+      "systems engineering"
+    ],
+    "Electronics": [
+      "electronics"
+    ],
+    "Civil Engineering": [
+      "civil engineering"
+    ],
+    "Computer Security": [
+      "computer security"
+    ],
+    "Pattern Recognition": [
+      "pattern recognition"
+    ],
+    "Ontology": [
+      "ontology"
+    ],
+    "Virtualization": [
+      "virtualization"
+    ],
+    "Computer Graphics": [
+      "computer graphics"
+    ],
+    "Politics": [
+      "politics"
+    ],
+    "Augmented Reality": [
+      "augmented reality"
+    ],
+    "Mobile": [
+      "mobile"
+    ],
+    "Mobility": [
+      "mobility"
+    ],
+    "Recommender Systems": [
+      "recommender systems"
+    ],
+    "Energy": [
+      "energy"
+    ],
+    "Physics": [
+      "physics"
+    ],
+    "Business Management": [
+      "business management"
+    ],
+    "Environment": [
+      "environment"
+    ],
+    "Web Services": [
+      "web services"
+    ],
+    "Service-oriented Architecture": [
+      "SOA"
+    ],
+    "Sensor Networks": [
+      "sensor networks"
+    ],
+    "Learning": [
+      "learning"
+    ],
+    "Usenix": [
+      "USENIX"
+    ],
+    "Information": [
+      "information"
+    ],
+    "Electrical": [
+      "electrical"
+    ],
+    "Social Web": [
+      "social web",
+      "social networks",
+      "social media",
+      "social sciences",
+      "social computing"
+    ],
+    "Algorithms": [
+      "algorithms"
+    ],
+    "Theoretical Computer Science": [
+      "theoretical computer science"
+    ],
+    "Model-driven Development": [
+      "model-driven development"
+    ],
+    "Social Networks": [
+      "social networks"
+    ],
+    "Information Management": [
+      "information management"
+    ],
+    "Medical": [
+      "medical"
+    ],
+    "E-learning": [
+      "e-learning",
+      "elearning"
+    ],
+    "Measurement": [
+      "measurement"
+    ],
+    "Remote Sensing": [
+      "remote sensing"
+    ],
+    "Big Data": [
+      "big data"
+    ],
+    "Mechanical": [
+      "mechanical"
+    ],
+    "Fuzzy Systems": [
+      "fuzzy systems"
+    ],
+    "Distributed Computing": [
+      "distributed computing"
+    ],
+    "Design Automation": [
+      "design automation"
+    ],
+    "Grid": [
+      "grid"
+    ],
+    "Computing": [
+      "computing"
+    ],
+    "Art": [
+      "art"
+    ],
+    "Digital Libraries": [
+      "digital libraries"
+    ],
+    "Humanities": [
+      "humanities"
+    ],
+    "Conference": [
+      "conference"
+    ],
+    "Pervasive": [
+      "pervasive"
+    ],
+    "Parallel Computing": [
+      "parallel computing"
+    ],
+    "Power": [
+      "power"
+    ],
+    "Instrumentation": [
+      "instrumentation"
+    ],
+    "Computer Architecture": [
+      "computer architecture"
+    ],
+    "Ambient Intelligence": [
+      "ambient intelligence"
+    ],
+    "Open Source": [
+      "open source"
+    ],
+    "Social Sciences": [
+      "social sciences"
+    ],
+    "Environmental Engineering": [
+      "environmental engineering"
+    ],
+    "English": [
+      "english"
+    ],
+    "Internet": [
+      "internet"
+    ],
+    "Agriculture": [
+      "agriculture"
+    ],
+    "Policy": [
+      "policy"
+    ],
+    "Programming Languages": [
+      "programming languages"
+    ],
+    "Ict": [
+      "ICT"
+    ],
+    "Propagation": [
+      "propagation"
+    ],
+    "Intelligent Systems": [
+      "intelligent systems"
+    ],
+    "Services": [
+      "services"
+    ],
+    "Computers": [
+      "computers"
+    ],
+    "Ubiquitous Computing": [
+      "ubiquitous computing"
+    ],
+    "Arts": [
+      "arts"
+    ],
+    "Industrial": [
+      "industrial"
+    ],
+    "Circuits": [
+      "circuits"
+    ],
+    "Multi-agent Systems": [
+      "multi-agent systems"
+    ],
+    "Ir": [
+      "IR"
+    ],
+    "Knowledge Management": [
+      "knowledge management"
+    ],
+    "Collaboration": [
+      "collaboration"
+    ],
+    "Complexity": [
+      "complexity"
+    ],
+    "Network": [
+      "network"
+    ],
+    "Reliability": [
+      "reliability"
+    ],
+    "Autonomic Computing": [
+      "autonomic computing"
+    ],
+    "Applications": [
+      "applications"
+    ],
+    "Aerospace": [
+      "aerospace"
+    ],
+    "Requirements Engineering": [
+      "requirements engineering"
+    ],
+    "Literature": [
+      "literature"
+    ],
+    "Knowledge Engineering": [
+      "knowledge engineering"
+    ],
+    "Parallel Programming": [
+      "parallel programming"
+    ],
+    "Pervasive Computing": [
+      "pervasive computing"
+    ],
+    "Gis": [
+      "GIS"
+    ],
+    "Hpc": [
+      "HPC"
+    ],
+    "Formal Methods": [
+      "formal methods"
+    ],
+    "Industrial Electronics": [
+      "industrial electronics"
+    ],
+    "Network Management": [
+      "network management"
+    ],
+    "Information Security": [
+      "information security"
+    ],
+    "Web 2.0": [
+      "web 2.0"
+    ],
+    "P2p": [
+      "P2P"
+    ],
+    "Architecture": [
+      "architecture"
+    ],
+    "Vlsi": [
+      "VLSI"
+    ],
+    "E-health": [
+      "e-health"
+    ],
+    "Biotechnology": [
+      "biotechnology"
+    ],
+    "Knowledge Representation": [
+      "knowledge representation"
+    ],
+    "Evaluation": [
+      "evaluation"
+    ],
+    "Social Media": [
+      "social media"
+    ],
+    "Virtual Reality": [
+      "virtual reality"
+    ],
+    "Interaction": [
+      "interaction"
+    ],
+    "Mathematics": [
+      "mathematics"
+    ],
+    "Parallel Processing": [
+      "parallel processing"
+    ],
+    "Ethics": [
+      "ethics"
+    ],
+    "Biology": [
+      "biology"
+    ],
+    "Statistics": [
+      "statistics"
+    ],
+    "Cscw": [
+      "CSCW"
+    ],
+    "Materials": [
+      "materials"
+    ],
+    "Operating Systems": [
+      "operating systems"
+    ],
+    "Religion": [
+      "religion"
+    ],
+    "Optimization": [
+      "optimization"
+    ],
+    "Information Theory": [
+      "information theory"
+    ],
+    "FPGA": [
+      "FPGA"
+    ],
+    "Health": [
+      "health"
+    ],
+    "Middleware": [
+      "middleware"
+    ],
+    "Automata Theory": [
+      "automata theory"
+    ],
+    "Mobile Computing": [
+      "mobile computing"
+    ],
+    "Society": [
+      "society"
+    ],
+    "Forensics": [
+      "forensics"
+    ],
+    "Biomedical Engineering": [
+      "biomedical engineering"
+    ],
+    "Information Science": [
+      "information science"
+    ],
+    "Architectures": [
+      "architectures"
+    ],
+    "Design": [
+      "design"
+    ],
+    "E-business": [
+      "e-business"
+    ],
+    "Wireless Communication": [
+      "wireless communication"
+    ],
+    "Wireless Sensor Networks": [
+      "wireless sensor networks"
+    ],
+    "Language": [
+      "language"
+    ],
+    "Teaching": [
+      "teaching"
+    ],
+    "Visualization": [
+      "visualization"
+    ],
+    "Information System": [
+      "information system"
+    ],
+    "Rfid": [
+      "RFID"
+    ],
+    "Sustainability": [
+      "sustainability"
+    ],
+    "Development": [
+      "development"
+    ],
+    "Lasers": [
+      "lasers"
+    ],
+    "Knowledge Discovery": [
+      "knowledge discovery"
+    ],
+    "Grid Computing": [
+      "grid computing"
+    ],
+    "Anthropology": [
+      "anthropology"
+    ],
+    "Psychology": [
+      "psychology"
+    ],
+    "Industrial Engineering": [
+      "industrial engineering"
+    ],
+    "Machine Translation": [
+      "machine translation"
+    ],
+    "Wireless Networks": [
+      "wireless networks"
+    ],
+    "Computation Theory": [
+      "computation theory"
+    ],
+    "Game Theory": [
+      "game theory"
+    ],
+    "Philosophy": [
+      "philosophy"
+    ],
+    "Ehealth": [
+      "ehealth"
+    ],
+    "Navigation": [
+      "navigation"
+    ],
+    "Healthcare": [
+      "healthcare"
+    ],
+    "Cyber Security": [
+      "cyber security"
+    ],
+    "Communication Systems": [
+      "communication systems"
+    ],
+    "Interdisciplinary": [
+      "interdisciplinary"
+    ],
+    "Media": [
+      "media"
+    ],
+    "Electronics Engineering": [
+      "electronics engineering"
+    ],
+    "Modelling": [
+      "modelling"
+    ],
+    "Human-computer Interaction": [
+      "human-computer interaction"
+    ],
+    "Mechanics": [
+      "mechanics"
+    ],
+    "High Performance Computing": [
+      "high performance computing"
+    ],
+    "Real-time": [
+      "real-time"
+    ],
+    "Optics": [
+      "optics"
+    ],
+    "Chemistry": [
+      "chemistry"
+    ],
+    "Renewable Energy": [
+      "renewable energy"
+    ],
+    "Semiconductor": [
+      "semiconductor"
+    ],
+    "Electron Devices": [
+      "electron devices"
+    ],
+    "Social Computing": [
+      "social computing"
+    ],
+    "Genealogy": [
+      "genealogy"
+    ]
+  }
+}

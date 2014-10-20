@@ -174,11 +174,11 @@ $(document).ready(function() {
     $("#conference_count").html(count);
   });
 
-  $.getJSON( "categories.json", function(data) {
+  $.getJSON( "ui-categories.json", function(data) {
     selector1 = $("#e1");
-    data["categories"].forEach(function(entry) {
-      selector1.append(new Option(entry, entry));
-    });
+    for (var key in data["categories"]) {
+      selector1.append(new Option(key, data["categories"][key]));
+    }
   });
 
   $.getJSON( "conference-repo.json", function(data) {
@@ -188,17 +188,19 @@ $(document).ready(function() {
   function selectByConfCategory() {
     var type;
     $("#e1").select2("val").forEach(function(item) {
-      for (var key in db.conferences) {
-        conference = db.conferences[key];
-        if (!!~db.conferences[key].categories.indexOf(item)) {
-          conf_location = conference["location"].toLowerCase();
-          type = "Conference"
-          if (conf_location === 'n/a' || conf_location === "publication" || conf_location === "online") {
-            type = "Journal"
+        item.split(',').forEach(function(subItem) {
+          for (var key in db.conferences) {
+            conference = db.conferences[key];
+            if (!!~db.conferences[key].categories.indexOf(subItem)) {
+              conf_location = conference["location"].toLowerCase();
+              type = "Conference"
+              if (conf_location === 'n/a' || conf_location === "publication" || conf_location === "online") {
+                type = "Journal"
+              }
+              makeMarker(type, conference, new google.maps.LatLng(conference["lat"], conference["lng"]), 1);
+            }
           }
-          makeMarker(type, conference, new google.maps.LatLng(conference["lat"], conference["lng"]), 1);
-        }
-      }
+        });
     });
   }
 

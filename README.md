@@ -1,4 +1,4 @@
 phdmate
 =======
 
-visualising call for papers
+visualizing call for papers

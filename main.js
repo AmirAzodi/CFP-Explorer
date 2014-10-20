@@ -2,6 +2,7 @@ $(document).ready(function() {
   var map;
   var markers = [];
   var markers2 = [];
+  var markers3 = [];
   var lastValidCenter;
   var oms;
 
@@ -54,6 +55,16 @@ $(document).ready(function() {
       if (shouldAdd) {
         markers2.push(marker);
       }
+    } else if (arrayId == 3) {
+      markers3.forEach(function(item) {
+        if (item.country == marker.country) {
+          shouldAdd = false;
+          return;
+        }
+      });
+      if (shouldAdd) {
+        markers3.push(marker);
+      }
     }
     if (shouldAdd) {
       oms.addMarker(marker);
@@ -89,28 +100,24 @@ $(document).ready(function() {
     clearMarkers(markers2);
     markers2 = [];
   }
+  function deleteCountryMarkers() {
+    clearMarkers(markers3);
+    markers3 = [];
+  }
 
   google.maps.event.addDomListener(window, 'load', initialize);
-
-  $("#inline-whatisthis").click(function () {
-    $.colorbox({href:"whatisthis.html"});
-  });
-
-  $("#inline-aboutus").click(function () {
-    $.colorbox({href:"aboutus.html"});
-  });
 
   $("#inline-faq").click(function () {
     $.colorbox({href:"faq.html"});
   });
 
   $("#e1").select2({
-    placeholder: "Select a Category",
+    placeholder: "Enter a Category",
     allowClear: true
   });
 
   $("#e2").select2({
-    placeholder: "Select a Conference",
+    placeholder: "Enter a Conference",
     allowClear: true
   }).on("select2-removing", function(e) {
     $("#cool div label").each(function() {
@@ -120,6 +127,11 @@ $(document).ready(function() {
         return false;
       }
     });
+  });
+
+  $("#e3").select2({
+    placeholder: "Enter a Country",
+    allowClear: true
   });
 
   var icons = {
@@ -149,10 +161,15 @@ $(document).ready(function() {
     db = data;
     $("#last_updated").html(db.last_updated);
     selector2 = $("#e2");
+    countrySelector = $("#e3");
     var count = 0;
     for (var key in db.conferences) {
       selector2.append(new Option(db.conferences[key].title, db.conferences[key].title));
       count = count + 1;
+      country = db.conferences[key].country;
+      if (country != undefined){
+        countrySelector.append(new Option(country, country));
+      }
     }
     $("#conference_count").html(count);
   });
@@ -180,6 +197,23 @@ $(document).ready(function() {
             type = "Journal"
           }
           makeMarker(type, conference, new google.maps.LatLng(conference["lat"], conference["lng"]), 1);
+        }
+      }
+    });
+  }
+
+  function selectByCountry () {
+    var type;
+    $("#e3").select2("val").forEach(function(item) {
+      for (var key in db.conferences) {
+        var conference = db.conferences[key];
+        if (conference.country === item) {
+          conf_location = conference["location"].toLowerCase();
+          type = "Conference"
+          if (conf_location === 'n/a' || conf_location === "publication" || conf_location === "online") {
+            type = "Journal"
+          }
+          makeMarker(type, conference, new google.maps.LatLng(conference["lat"], conference["lng"]),3);
         }
       }
     });
@@ -289,6 +323,14 @@ $(document).ready(function() {
   $("#e2").click(function() {
     deleteTitleMarkers();
     selectByConfTitle();
+    if ($("#cool div label").length == 0) {
+      $("#cool").hide();
+    }
+  });
+
+  $("#e3").click(function() {
+    deleteCountryMarkers();
+    selectByCountry();
     if ($("#cool div label").length == 0) {
       $("#cool").hide();
     }

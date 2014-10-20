@@ -162,7 +162,7 @@ $(document).ready(function() {
   $.getJSON( "db.json", function( data ) {
     var associativeArray = {};
     db = data;
-    $("#last_updated").html(db.last_updated);
+    $("#last_updated").html(db.last_updated.split(' ')[0]);
     selector2 = $("#e2");
     countrySelector = $("#e3");
     var listOfCountries = [];
@@ -343,5 +343,9 @@ $(document).ready(function() {
     if ($("#cool div label").length == 0) {
       $("#cool").hide();
     }
+  });
+
+  $("#listClose").click(function() {
+    $("#cool").hide();
   });
 });

@@ -23,17 +23,15 @@
       <div class="container phdmate-nav">
         <div class="row">
           <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
+            <button type="button" class="navbar-toggle">
               <span class="sr-only">Toggle navigation</span>
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
             <span class="navbar-brand" href="#">PhD Conference Assistant</span>
-          </div>
-          <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav pull-right">
-            <li><a id="inline-faq" href="#">FAQ</a></li>
+            <li><a id="inline-faq" class="pull-right" href="#">FAQ</a></li>
             </ul>
           </div>
         </div>
@@ -46,15 +44,16 @@
     </div>
     <div id="map_canvas"></div>
     <div id="cool" class="list-group">
-      <h5>Conferences w/o location:</h5>
+    <button type="button" id="listClose">close</button>
+      <h5>Conferences:</h5>
       <div id="stranded_confs">
       </div>
-      <h5>Journals w/o location:</h5>
+      <h5>Journals:</h5>
       <div id="stranded_journals">
       </div>
     </div>
     <div id="info">
-      <div class="last_updated">Number of Conferences:&nbsp;<span id="conference_count"></span></div>
+      <div class="last_updated"># of Conferences:&nbsp;<span id="conference_count"></span></div>
       <div class="last_updated">Last updated:&nbsp;<span id="last_updated"></span></div>
     </div>
   </body>

@@ -13,8 +13,8 @@ $(document).ready(function() {
       center: new google.maps.LatLng(38.150160, 12.728289),
       // minZoom:3,
       zoom:4,
-      mapTypeId: google.maps.MapTypeId.ROADMAP,
-      styles: [{"featureType":"administrative","elementType":"all","stylers":[{"visibility":"on"},{"saturation":-100},{"lightness":20}]},{"featureType":"road","elementType":"all","stylers":[{"visibility":"on"},{"saturation":-100},{"lightness":40}]},{"featureType":"water","elementType":"all","stylers":[{"visibility":"on"},{"saturation":-10},{"lightness":30}]},{"featureType":"landscape.man_made","elementType":"all","stylers":[{"visibility":"simplified"},{"saturation":-60},{"lightness":10}]},{"featureType":"landscape.natural","elementType":"all","stylers":[{"visibility":"simplified"},{"saturation":-60},{"lightness":60}]},{"featureType":"poi","elementType":"all","stylers":[{"visibility":"off"},{"saturation":-100},{"lightness":60}]},{"featureType":"transit","elementType":"all","stylers":[{"visibility":"off"},{"saturation":-100},{"lightness":60}]}]
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+      // styles: [{"featureType":"administrative","elementType":"all","stylers":[{"visibility":"on"},{"saturation":-100},{"lightness":20}]},{"featureType":"road","elementType":"all","stylers":[{"visibility":"on"},{"saturation":-100},{"lightness":40}]},{"featureType":"water","elementType":"all","stylers":[{"visibility":"on"},{"saturation":-10},{"lightness":30}]},{"featureType":"landscape.man_made","elementType":"all","stylers":[{"visibility":"simplified"},{"saturation":-60},{"lightness":10}]},{"featureType":"landscape.natural","elementType":"all","stylers":[{"visibility":"simplified"},{"saturation":-60},{"lightness":60}]},{"featureType":"poi","elementType":"all","stylers":[{"visibility":"off"},{"saturation":-100},{"lightness":60}]},{"featureType":"transit","elementType":"all","stylers":[{"visibility":"off"},{"saturation":-100},{"lightness":60}]}]
     };
 
 
@@ -258,16 +258,17 @@ $(document).ready(function() {
         listToAddTo = $("#stranded_journals")
       }
       listToAddTo.append(
-          $('<label>')
-            .attr('class', 'list-group-item')
-            .append(
-              $('<a>')
-                .attr('target', "_blank")
-                .append(conference["title"]))
-            .click(function(){
-              $.colorbox({html:contents});
-            })
-            );
+        $('<label>')
+          .attr('class', 'list-group-item')
+          .append(
+            $('<a>')
+              .attr('target', "_blank")
+              .append(conference["title"]))
+          .click(function(){
+            $.colorbox({html:contents});
+          }
+        )
+      );
     }
     $("#cool").show();
   }

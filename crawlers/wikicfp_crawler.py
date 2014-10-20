@@ -63,6 +63,8 @@ def parseWikiCFP(OLD_DATASTORE, cat):
                 result = response.json()["results"][0]
                 conf_loc_info = result["geometry"]["location"]
                 country = result["formatted_address"][result["formatted_address"].rfind(',')+1:].strip()
+                if '-' in country:
+                  country = country[country.rfind('-')+1:].strip()
                 conference = pSucks(conf_title,conf_full_title,conf_url,conf_date,conf_location,conf_submission,conf_loc_info["lat"],conf_loc_info["lng"],cat,country)
                 print country
               else:

@@ -106,7 +106,7 @@ def run(repo, db):
         #print "I: %s" % identifier
         #print "T: %s    |   L: %s  | P: %s | D: %s | R: %s " %(title,location,publisher,deadline,rank)
         
-    f = open('../conference-repo2.json','w')
+    f = open('../conference-repo.json','w')
     f.write(json.dumps(repo))
     f.close()
     f2 = open('../db.json','w')
@@ -115,7 +115,7 @@ def run(repo, db):
 
 
 if __name__ == '__main__':
-    f = open('../conference-repo2.json','r')
+    f = open('../conference-repo.json','r')
     repo = json.loads(f.read())
     f.close()
     #print repo

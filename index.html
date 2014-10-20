@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>PhD Mate</title>
+    <title>PhD Conference Assistant</title>
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
     <meta charset="utf-8">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
@@ -29,21 +29,11 @@
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">PhD Mate ;D</a>
+            <span class="navbar-brand" href="#">PhD Conference Assistant</span>
           </div>
           <div class="navbar-collapse collapse">
-            <ul class="nav navbar-nav pull-left">
-              <li><a id="inline-whatisthis" href="#">What is this?</a></li>
-              <li><a id="inline-aboutus" href="#">About us</a></li>
-              <li><a id="inline-faq" href="#">FAQ</a></li>
-            </ul>
             <ul class="nav navbar-nav pull-right">
-              <li class="last_updated">
-                Last updated:&nbsp;<span id="last_updated"></span>
-              </li>
-              <li class="last_updated">
-                Number of Conferences:&nbsp;<span id="conference_count"></span>
-              </li>
+            <li><a id="inline-faq" href="#">FAQ</a></li>
             </ul>
           </div>
         </div>
@@ -54,13 +44,17 @@
       </div>
     </div>
     <div id="map_canvas"></div>
-    <div id="cool">
+    <div id="cool" class="list-group">
       <h5>Conferences w/o location:</h5>
-      <div id="stranded_confs" class="btn-group-vertical">
+      <div id="stranded_confs">
       </div>
       <h5>Journals w/o location:</h5>
-      <div id="stranded_journals" class="btn-group-vertical">
+      <div id="stranded_journals">
       </div>
+    </div>
+    <div id="info">
+      <div class="last_updated">Number of Conferences:&nbsp;<span id="conference_count"></span></div>
+      <div class="last_updated">Last updated:&nbsp;<span id="last_updated"></span></div>
     </div>
   </body>
 </html>

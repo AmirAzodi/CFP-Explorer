@@ -57,7 +57,7 @@ $(document).ready(function() {
       }
     } else if (arrayId == 3) {
       markers3.forEach(function(item) {
-        if (item.country == marker.country) {
+        if (item.title == marker.title) {
           shouldAdd = false;
           return;
         }
@@ -155,6 +155,9 @@ $(document).ready(function() {
 
   var db;
   var staticConferenceDB;
+  function onlyUnique(value, index, self) {
+    return self.indexOf(value) === index;
+  }
 
   $.getJSON( "db.json", function( data ) {
     var associativeArray = {};
@@ -162,15 +165,19 @@ $(document).ready(function() {
     $("#last_updated").html(db.last_updated);
     selector2 = $("#e2");
     countrySelector = $("#e3");
+    var listOfCountries = [];
     var count = 0;
     for (var key in db.conferences) {
       selector2.append(new Option(db.conferences[key].title, db.conferences[key].title));
       count = count + 1;
       country = db.conferences[key].country;
       if (country != undefined){
-        countrySelector.append(new Option(country, country));
+        listOfCountries.push(country);
       }
     }
+    listOfCountries.filter(onlyUnique).forEach(function(country) {
+      countrySelector.append(new Option(country, country));
+    });
     $("#conference_count").html(count);
   });
 
@@ -215,7 +222,7 @@ $(document).ready(function() {
           if (conf_location === 'n/a' || conf_location === "publication" || conf_location === "online") {
             type = "Journal"
           }
-          makeMarker(type, conference, new google.maps.LatLng(conference["lat"], conference["lng"]),3);
+          makeMarker(type, conference, new google.maps.LatLng(conference["lat"], conference["lng"]), 3);
         }
       }
     });

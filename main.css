@@ -7,9 +7,14 @@ html, body {
   margin-bottom: 0px !important;
 }
 
+.navbar-fixed-top {
+  right: 20% !important;
+  left: 20% !important;
+}
+
 .select2-container {
   width:100%;
-  min-width: 300px;
+  min-width: 200px;
   padding-left: 1px;
   padding-right: 1px;
   max-width: 567px;
@@ -25,6 +30,8 @@ html, body {
 #cboxOverlay {
   background: rgba(0,0,0,0) !important;
   opacity: 0.3 !important;
+  width: auto;
+  height: auto;
 }
 
 .popup {
@@ -32,7 +39,7 @@ html, body {
 }
 
 .last_updated {
-  padding: 15px;
+  padding: 5px;
   color: #428bca;
 }
 
@@ -42,6 +49,8 @@ html, body {
   opacity: 0.9;
   background-color: pink;
   padding-bottom: 10px;
+  width: auto;
+  max-width: 1170px;
 }
 
 #cool{
@@ -52,7 +61,6 @@ html, body {
   position:absolute;
   bottom:0;
   left:0;
-  /*width: 12em;*/
   height: 30em;
   line-height: 2em;
   border: 1px solid #ccc;
@@ -61,7 +69,25 @@ html, body {
   overflow-x: hidden;
 }
 
-ul {
+#info{
+  /*padding: 5px;*/
+  opacity: 0.9;
+  background-color: pink;
+  position:absolute;
+  bottom:0;
+  right:0;
+}
+
+.list-group-item {
+  padding: 2px;
+}
+#cboxClose {
+  top:0;
+  right: 0;
+  bottom: auto;
+}
+
+/*ul {
   padding-left: 5px;
   list-style-type: none;
-}
+}*/

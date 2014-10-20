@@ -171,7 +171,7 @@ $(document).ready(function() {
       selector2.append(new Option(db.conferences[key].title, db.conferences[key].title));
       count = count + 1;
       country = db.conferences[key].country;
-      if (country != undefined){
+      if (country != undefined && country != "Unknown" ) {
         listOfCountries.push(country);
       }
     }

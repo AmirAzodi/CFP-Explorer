@@ -262,7 +262,6 @@ $(document).ready(function() {
             .attr('class', 'list-group-item')
             .append(
               $('<a>')
-                // .attr('href', "#")
                 .attr('target', "_blank")
                 .append(conference["title"]))
             .click(function(){

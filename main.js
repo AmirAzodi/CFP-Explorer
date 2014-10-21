@@ -60,15 +60,34 @@ function makeMarker(conference) {
     var info = '(<b>Type:</b> Unknown, ' + '<b>Ranking:</b> Unknown, ' + '<b>Tier:</b> Unknown)';
   }
 
-  var contents = '<table class="infoboks table"><tbody>'+
-'<tr><td class="ik">Title</td><td>'                       + conference["title"] +'</td></tr>'+
-'<tr><td class="ik">Full Title</td><td>'                  + conference["full_title"] + '</td></tr>'+
-'<tr><td class="ik">Deadline</td><td>'                    + conference["submission"] + '</td></tr>'+
-'<tr><td class="ik">Location</td><td>'                    + conference["location"] + '</td></tr>'+
-'<tr><td class="ik">Date</td><td>'                        + conference["date"] + '</td></tr>'+
-'<tr><td class="ik">URL</td><td><a target="_blank" href="'+ conference["url"] + '">LINK</a></td></tr>'+
-'<tr><td class="ik">Event</td><td><a href="javascript:void(0)" onclick="javascript:calendarEvent(\''+conference["title"]+'\')">Add to Calendar</a></td></tr>'+
-'<tr><td class="ik">Categories</td><td>'                  + conference["categories"] + '</td></tr></tbody></table>';
+var contents =
+'<table class="infoboks table"><tbody>'+
+'<tr>'+
+  '<td>Title</td><td>'+ conference["title"] +'</td>'+
+'</tr>'+
+'<tr>'+
+  '<td>Full Title</td><td>'+ conference["full_title"] +'</td>'+
+'</tr>'+
+'<tr>'+
+  '<td>Deadline</td>' + '<td>'+ conference["submission"] +'</td>'+
+'</tr>'+
+'<tr>'+
+  '<td>Location</td>' + '<td>'+ conference["location"] +'</td>'+
+'</tr>'+
+'<tr>'+
+  '<td>Date</td>' + '<td>'+ conference["date"] +'</td>'+
+'</tr>'+
+'<tr>'+
+  '<td>Action</td>' + '<td>'+
+    '<a target="_blank" href="'+ conference["url"] + '">LINK</a>'+
+    '&nbsp;&nbsp;&nbsp;'+
+    '<a href="javascript:void(0)" onclick="javascript:calendarEvent(\''+conference["title"]+'\')">Add to Calendar</a>'
+  +'</td>'+
+'</tr>'+
+'<tr>'+
+  '<td>Categories</td><td>'+ conference["categories"] +'</td>'+
+'</tr>'
++'</tbody></table>';
 
   if (conference["lat"] == 0 && conference["lng"] == 0) {
     conference["contents"] = contents;

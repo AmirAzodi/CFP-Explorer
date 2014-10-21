@@ -78,9 +78,7 @@ html, body {
 }
 
 .list-group-item {
-  /*padding: 2px;*/
   font-weight: 200;
-  /*font-size: 12px;*/
 }
 
 #cboxClose {
@@ -93,4 +91,12 @@ html, body {
   top:0;
   right: 0;
   position: absolute;
+}
+
+.infoboks {
+  max-width: 400px;
+  width: auto;
+}
+.ik {
+  font-weight: bold;
 }

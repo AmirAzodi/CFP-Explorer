@@ -19,7 +19,7 @@ function calendarEvent(title) {
       cal = ics();
       cal.addEvent(conference["title"], conference["full_title"], conference["location"], conference["submission"], conference["submission"]);
       cal.download();
-      console.log("FOIUDNT ");
+      return false;
     }
   }
 }

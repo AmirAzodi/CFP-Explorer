@@ -40,10 +40,10 @@ function onlyUnique(value, index, self) {
 function makeMarker(conference) {
   var title = conference["title"].toLowerCase().match(/\w+/)[0];
   var iconType;
-
+  var info;
   if (staticConferenceDB[title] != undefined) {
     var confInfo = staticConferenceDB[title];
-    var info = '(<b>Type:</b> ' + confInfo.type + ', ' + '<b>Ranking:</b> ' + confInfo.ranking + ', ' + '<b>Tier:</b> ' + confInfo.tier + ')';
+    info = 'Publisher: ' + confInfo.type + '<br>Ranking: ' + confInfo.ranking + '<br>Tier: ' + confInfo.tier;
     if (confInfo.tier === "A") {
       iconType = "TOP";
     } else if (confInfo.tier === "B") {
@@ -57,13 +57,16 @@ function makeMarker(conference) {
     }
   } else {
     iconType = "UNKNOWN";
-    var info = '(<b>Type:</b> Unknown, ' + '<b>Ranking:</b> Unknown, ' + '<b>Tier:</b> Unknown)';
+    info = 'Publisher: Unknown' + '<br>Ranking: Unknown' + '<br>Tier: Unknown';
   }
 
 var contents =
 '<table class="infoboks table"><tbody>'+
 '<tr>'+
   '<td>Title</td><td>'+ conference["title"] +'</td>'+
+'</tr>'+
+'<tr>'+
+  '<td>Info</td><td>'+ info +'</td>'+
 '</tr>'+
 '<tr>'+
   '<td>Full Title</td><td>'+ conference["full_title"] +'</td>'+
@@ -103,10 +106,10 @@ var contents =
   });
 }
 
-function placeMarkers() {
+function placeMarkers(and) {
   newMarkers = [];
-  var trackedMarkers = oms.getMarkers();
   var type;
+  var e1List = [];
   $("#e1").select2("val").forEach(function(item) {
       item.split(',').forEach(function(subItem) {
         for (var key in db.conferences) {
@@ -119,12 +122,13 @@ function placeMarkers() {
             }
             conference["geoLocation"] = new google.maps.LatLng(conference["lat"], conference["lng"]);
             conference["type"] = type;
-            newMarkers.push(makeMarker(conference));
+            e1List.push(makeMarker(conference));
           }
         }
       });
   });
 
+  var e2List = [];
   $("#e2").select2("val").forEach(function(item) {
     conference = db.conferences[item.toLowerCase()];
     conf_location = conference["location"].toLowerCase();
@@ -134,9 +138,10 @@ function placeMarkers() {
     }
     conference["geoLocation"] = new google.maps.LatLng(conference["lat"], conference["lng"]);
     conference["type"] = type;
-    newMarkers.push(makeMarker(conference));
+    e2List.push(makeMarker(conference));
   });
 
+  var e3List = [];
   $("#e3").select2("val").forEach(function(item) {
     for (var key in db.conferences) {
       var conference = db.conferences[key];
@@ -148,10 +153,20 @@ function placeMarkers() {
         }
         conference["geoLocation"] = new google.maps.LatLng(conference["lat"], conference["lng"]);
         conference["type"] = type;
-        newMarkers.push(makeMarker(conference));
+        e3List.push(makeMarker(conference));
       }
     }
   });
+
+  if (and) {
+    newMarkers = e1List.filter( function( el ) {
+      if (el != undefined) {
+        return arrayObjectIndexOf(e3List, el.title, "title") != -1;
+      }
+    }).concat(e2List);
+  } else {
+    newMarkers = e1List.concat(e2List).concat(e3List);
+  }
 
   newMarkers.filter( function( el ) {
     if (el != undefined) {
@@ -293,21 +308,36 @@ $(document).ready(function() {
 
   $("#e1").click(function() {
     $("#cool div").empty();
-    placeMarkers();
+    if ($('#toAND').is(":checked"))
+    {
+      placeMarkers(true);
+    } else {
+      placeMarkers(false);
+    }
     if ($("#cool div label").length == 0) {
       $("#cool").hide();
     }
   });
 
   $("#e2").click(function() {
-    placeMarkers();
+    if ($('#toAND').is(":checked"))
+    {
+      placeMarkers(true);
+    } else {
+      placeMarkers(false);
+    }
     if ($("#cool div label").length == 0) {
       $("#cool").hide();
     }
   });
 
   $("#e3").click(function() {
-    placeMarkers();
+    if ($('#toAND').is(":checked"))
+    {
+      placeMarkers(true);
+    } else {
+      placeMarkers(false);
+    }
     if ($("#cool div label").length == 0) {
       $("#cool").hide();
     }
@@ -315,5 +345,16 @@ $(document).ready(function() {
 
   $("#listClose").click(function() {
     $("#cool").hide();
+  });
+
+  $("#toAND").change(function() {
+    if ($("#toAND").is(":checked")) {
+      placeMarkers(true);
+    } else {
+      placeMarkers(false);
+    }
+    if ($("#cool div label").length == 0) {
+      $("#cool").hide();
+    }
   });
 });

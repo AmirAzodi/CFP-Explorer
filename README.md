@@ -1,4 +1,4 @@
-phdmate
+PhD Mate (Also know as Conference Explorer)
 =======
 
 * Visualizing call for papers from Multiple sources

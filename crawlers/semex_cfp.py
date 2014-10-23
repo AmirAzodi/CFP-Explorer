@@ -32,15 +32,15 @@ def run(repo, db):
         url=url,
         body=requests.get(url).text,
         encoding = 'utf-8').selector.xpath('//table[@id =\'main\']').extract()[0]
- 
+
     titles = title_re.findall(h)
     rest = rest_re.findall(h)
-    
+
     full_titles = full_title_re.findall(h)
     urls = [unquote(url) for url in urls_re.findall(h)]
-   
+
     for title_num in range(len(titles)):
-        
+
         full_title = full_titles[title_num]
         if full_title:
             title = full_title[full_title.find('"')+1:full_title.rfind('"')]
@@ -48,7 +48,7 @@ def run(repo, db):
             title = titles[title_num].replace('\'',' 20')
         cfpIdentifier = titles[title_num].replace('\'',' 20').lower().strip()
         identifier = titles[title_num][:titles[title_num].find('\'')].lower().strip()
-        
+
         location = rest[4*title_num]
         publisher = rest[4*title_num+1]
         deadline = rest[4*title_num+2]
@@ -77,15 +77,15 @@ def run(repo, db):
                 response = requests.get(gMapsURL, params=userdata)
                 if 'OK' == response.json()["status"]:
                     conf_loc_info = response.json()["results"][0]["geometry"]["location"]
-                    
+
                     cfps[cfpIdentifier]["lat"] = conf_loc_info["lat"]
                     cfps[cfpIdentifier]["lng"] = conf_loc_info["lng"]
                 else:
                     print "Invalid Response:"
                     print response.json()
-                    
+
             #print "CREATED: %s" % cfpIdentifier
-            
+
         if identifier in conferences.keys():
             #print "FOUND %s " % identifier
             if len(conferences[identifier]["full_title"])<len(title):
@@ -102,25 +102,25 @@ def run(repo, db):
             confDict["type"] = publisher
             confDict["tier"] = rank
             conferences[identifier] = confDict
-            
+
         #print "I: %s" % identifier
         #print "T: %s    |   L: %s  | P: %s | D: %s | R: %s " %(title,location,publisher,deadline,rank)
-        
-    f = open('../conference-repo.json','w')
+
+    f = open('../www/conference-repo.json','w')
     f.write(json.dumps(repo))
     f.close()
-    f2 = open('../db.json','w')
+    f2 = open('../www/db.json','w')
     f2.write(json.dumps(db))
     f2.close()
 
 
 if __name__ == '__main__':
-    f = open('../conference-repo.json','r')
+    f = open('../www/conference-repo.json','r')
     repo = json.loads(f.read())
     f.close()
     #print repo
-    f2 = open('../db.json','r')
+    f2 = open('../www/db.json','r')
     db = json.loads(f2.read())
     f2.close()
-    
+
     run(repo, db)

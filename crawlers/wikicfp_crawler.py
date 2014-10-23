@@ -4,7 +4,7 @@ import re, json
 import cgi
 import datetime
 
-categories_file_loc = "../categories.json"
+categories_file_loc = "categories.json"
 title_R      = re.compile(r'<a.*>(.*?)</a>', re.U)
 full_title_R = re.compile(r'<td align="left" colspan="3">(.*?)</td>', re.U)
 url_R        = re.compile(r'href=[\'"]?([^\'" >]+)', re.U)
@@ -100,7 +100,7 @@ def main():
   with open(categories_file_loc,'r') as f:
     list_of_wiki_cfp_categories = json.loads(f.read())
 
-  old_file_ = open('../db.json', 'r')
+  old_file_ = open('../www/db.json', 'r')
   OLD_DATASTORE = json.loads(old_file_.read())
   old_file_.close()
 
@@ -111,7 +111,7 @@ def main():
   jsonDatabase = '{"last_updated": "' + str(datetime.datetime.now()) + '","conferences":'
   jsonDatabase += json.dumps(conferences, default=lambda o: o.__dict__)
   jsonDatabase += '}'
-  new_file_ = open('../db.json', 'w')
+  new_file_ = open('../www/db.json', 'w')
   new_file_.write(jsonDatabase)
   new_file_.close()
 

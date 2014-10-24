@@ -4,8 +4,6 @@ from datetime import date
 from scrapy.http import HtmlResponse
 import re
 import cgi
-from conference import *
-from category import *
 import json
 import pprint
 

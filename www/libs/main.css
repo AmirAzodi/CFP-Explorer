@@ -51,14 +51,9 @@ html, body {
   position: absolute;
 }
 
-.infoboks {
-  max-width: 340px;
-  width: auto;
+.panel {
   margin-bottom: 0px;
-}
-
-.infoboks td  {
-  padding-right: 0px !important;
+  max-width: 300px !important;
 }
 
 .ik {

@@ -61,36 +61,34 @@ function makeMarker(conference) {
   }
 
 var contents =
-'<table class="infoboks table"><tbody>'+
+'<div class="panel panel-default"><div class="panel-heading"><b>'+ conference["title"] +'</b></div>' +
+'<table class="infoboks table table-condensed"><tbody>'+
 '<tr>'+
-  '<td>Title</td><td><b>'+ conference["title"] +'</b></td>'+
+  '<td><b>Info</b></td><td>'+ info +'</td>'+
 '</tr>'+
 '<tr>'+
-  '<td>Info</td><td>'+ info +'</td>'+
+  '<td><b>Full Title</b></td><td>'+ conference["full_title"] +'</td>'+
 '</tr>'+
 '<tr>'+
-  '<td>Full Title</td><td>'+ conference["full_title"] +'</td>'+
+  '<td><b>Deadline</b></td>' + '<td>'+ conference["submission"] +'</td>'+
 '</tr>'+
 '<tr>'+
-  '<td>Deadline</td>' + '<td>'+ conference["submission"] +'</td>'+
+  '<td><b>Location</b></td>' + '<td>'+ conference["location"] +'</td>'+
 '</tr>'+
 '<tr>'+
-  '<td>Location</td>' + '<td>'+ conference["location"] +'</td>'+
+  '<td><b>Date</b></td>' + '<td>'+ conference["date"] +'</td>'+
 '</tr>'+
 '<tr>'+
-  '<td>Date</td>' + '<td>'+ conference["date"] +'</td>'+
-'</tr>'+
-'<tr>'+
-  '<td>Action</td>' + '<td>'+
+  '<td><b>Action</b></td>' + '<td>'+
     '<a target="_blank" href="'+ conference["url"] + '">LINK</a>'+
     '&nbsp;&nbsp;&nbsp;'+
     '<a href="javascript:void(0)" onclick="javascript:calendarEvent(\''+conference["title"]+'\')">Add to Calendar</a>'
   +'</td>'+
 '</tr>'+
 '<tr>'+
-  '<td>Categories</td><td>'+ conference["categories"] +'</td>'+
+  '<td><b>Categories</b></td><td>'+ conference["categories"] +'</td>'+
 '</tr>'
-+'</tbody></table>';
++'</tbody></table></div>';
 
   if (conference["lat"] == 0 && conference["lng"] == 0) {
     conference["contents"] = contents;
@@ -214,7 +212,7 @@ function addToList(conference) {
             .attr('target', "_blank")
             .append(conference["title"]))
         .click(function(){
-          $.fancybox(conference["contents"], {title : conference["title"]});
+          $.fancybox(conference["contents"]);
         }
       )
     );

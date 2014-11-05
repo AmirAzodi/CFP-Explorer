@@ -6,15 +6,17 @@
     <meta charset="utf-8">
     <link rel="stylesheet" href="libs/bootstrap.min.css">
     <link rel="stylesheet" href="libs/select2/select2.css">
-    <link rel="stylesheet" href="libs/select2-bootstrap.min.css">
     <link rel="stylesheet" href="libs/select2-bootstrap.css">
-    <link rel="stylesheet" href="libs/example4/colorbox.css">
+    <link rel="stylesheet" href="libs/fancybox/jquery.fancybox.css">
     <link rel="stylesheet" href="libs/main.css">
   </head>
   <body>
     <nav class="navbar navbar-default" role="navigation">
       <div class="container-fluid">
-        <!-- Brand and toggle get grouped for better mobile display -->
+        <!-- <div class="navbar-header pull-right">
+          <ul class="nav navbar-nav pull-right">
+          </ul>
+        </div> -->
         <div class="navbar-header">
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
             <span class="sr-only">Toggle navigation</span>
@@ -22,13 +24,9 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">Conference Explorer</a>
+          <a class="navbar-brand" href="javascript:void(0)">Conference Explorer</a>
         </div>
-        <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-          <!-- <form class="navbar-form navbar-left" role="search"> -->
-            <!-- <div class="form-group"> -->
-              <!-- <div class="select2-container select2-container-multi form-control" id="e1"></div> -->
               <select multiple id="e1"></select>
               <select multiple id="e2"></select>
               <select multiple id="e3"></select>
@@ -36,14 +34,10 @@
                 <li><a>Conference count: <span id="conference_count"></span></a></li>
                 <li><a>Last updated: <span id="last_updated"></span></a></li>
                 <li><a>AND Cat. with Country <input type="checkbox" id="toAND"></a></li>
-                <li><a id="inline-faq" href="#">FAQ</a></li>
+                <li><a id="inline-faq" href="javascript:void(0)"><u>FAQ</u></a></li>
               </ul>
-
-            <!-- </div> -->
-          <!-- </form> -->
-
-        </div><!-- /.navbar-collapse -->
-      </div><!-- /.container-fluid -->
+        </div>
+      </div>
     </nav>
     <div id="map_canvas"></div>
     <div id="cool" class="list-group">
@@ -57,11 +51,11 @@
     </div>
   </body>
   <script src="libs/jquery.min.js"></script>
-  <script src="https://maps.googleapis.com/maps/api/js"></script>
-  <script src="libs/oms.min.js"></script>
   <script src="libs/bootstrap.min.js"></script>
   <script src="libs/select2/select2.min.js"></script>
-  <script src="libs/jquery.colorbox-min.js"></script>
+  <script src="https://maps.googleapis.com/maps/api/js"></script>
+  <script src="libs/oms.min.js"></script>
+  <script src="libs/fancybox/jquery.fancybox.pack.js"></script>
   <script src="libs/ics.deps.min.js"></script>
   <script src="libs/ics.min.js"></script>
   <script src="libs/main.js"></script>

@@ -214,7 +214,7 @@ function addToList(conference) {
             .attr('target', "_blank")
             .append(conference["title"]))
         .click(function(){
-          $.colorbox({html:conference["contents"]});
+          $.fancybox(conference["contents"], {title : conference["title"]});
         }
       )
     );
@@ -247,8 +247,12 @@ function initialize() {
 $(document).ready(function() {
   google.maps.event.addDomListener(window, 'load', initialize);
 
-  $("#inline-faq").click(function () {
-    $.colorbox({href:"faq.html"});
+  $("#inline-faq").click(function() {
+    $.get("faq.html", function(data) {
+      $.fancybox(data, {
+        title : 'FAQ'
+      });
+    });
   });
 
   $("#e1").select2({

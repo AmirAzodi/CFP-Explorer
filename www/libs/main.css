@@ -7,11 +7,11 @@ html, body {
 .navbar {
   margin-bottom: 0px !important;
   background-color: rgba(255,192,203,0.8);
-   border: none;
+  border: none;
 }
 
 .select2-container {
-  min-width:300px;
+  min-width: 300px;
   margin-top: 8px;
 }
 

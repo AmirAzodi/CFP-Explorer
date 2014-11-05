@@ -63,7 +63,7 @@ function makeMarker(conference) {
 var contents =
 '<table class="infoboks table"><tbody>'+
 '<tr>'+
-  '<td>Title</td><td>'+ conference["title"] +'</td>'+
+  '<td>Title</td><td><b>'+ conference["title"] +'</b></td>'+
 '</tr>'+
 '<tr>'+
   '<td>Info</td><td>'+ info +'</td>'+

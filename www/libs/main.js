@@ -100,7 +100,7 @@ var contents =
 
   return new google.maps.Marker({
     position: conference["geoLocation"],
-    icon: "https://maps.google.com/mapfiles/ms/icons/" + icons[iconType],
+    icon: "libs/img/" + icons[iconType],
     title: conference["title"].trim().toLowerCase(),
     desc: contents
   });

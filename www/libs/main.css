@@ -6,6 +6,8 @@ html, body {
 
 .navbar {
   margin-bottom: 0px !important;
+  background-color: rgba(255,192,203,0.8);
+   border: none;
 }
 
 .select2-container {

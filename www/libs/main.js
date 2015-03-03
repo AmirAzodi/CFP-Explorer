@@ -9,7 +9,8 @@ var icons = {
   KNOWN: 'blue.png',
   OK: 'yellow.png',
   GOOD: 'orange.png',
-  TOP: 'green.png'
+  TOP: 'green.png',
+  WORKSHOP: 'W.png'
 };
 
 function calendarEvent(title) {
@@ -41,6 +42,7 @@ function makeMarker(conference) {
   var title = conference["title"].toLowerCase().match(/\w+/)[0];
   var iconType;
   var info;
+  // console.log(conference["type"]);
   if (staticConferenceDB[title] != undefined) {
     var confInfo = staticConferenceDB[title];
     info = 'Publisher: ' + confInfo.type + '<br>Ranking: ' + confInfo.ranking + '<br>Tier: ' + confInfo.tier;
@@ -59,7 +61,10 @@ function makeMarker(conference) {
     iconType = "UNKNOWN";
     info = 'Publisher: Unknown' + '<br>Ranking: Unknown' + '<br>Tier: Unknown';
   }
-
+  if (conference["type"] === "Workshop") {
+      iconType = "WORKSHOP";
+      console.log("HERE");
+    }
 var contents =
 '<div class="panel panel-default"><div class="panel-heading"><b>'+ conference["title"] +'</b></div>' +
 '<table class="infoboks table table-condensed"><tbody>'+
@@ -108,6 +113,7 @@ function placeMarkers(and) {
   newMarkers = [];
   var type;
   var e1List = [];
+
   $("#e1").select2("val").forEach(function(item) {
       item.split(',').forEach(function(subItem) {
         for (var key in db.conferences) {
@@ -117,6 +123,8 @@ function placeMarkers(and) {
             type = "Conference"
             if (conf_location === 'n/a' || conf_location === "publication" || conf_location === "online") {
               type = "Journal"
+            } else if (conference["full_title"].toLowerCase().indexOf("workshop") != -1) {
+              type = "Workshop";
             }
             conference["geoLocation"] = new google.maps.LatLng(conference["lat"], conference["lng"]);
             conference["type"] = type;
@@ -133,6 +141,8 @@ function placeMarkers(and) {
     type = "Conference"
     if (conf_location === 'n/a' || conf_location === "publication" || conf_location === "online") {
       type = "Journal"
+    } else if (conference["full_title"].toLowerCase().indexOf("workshop") != -1) {
+      type = "Workshop"
     }
     conference["geoLocation"] = new google.maps.LatLng(conference["lat"], conference["lng"]);
     conference["type"] = type;
@@ -148,6 +158,8 @@ function placeMarkers(and) {
         type = "Conference"
         if (conf_location === 'n/a' || conf_location === "publication" || conf_location === "online") {
           type = "Journal"
+        } else if (conference["full_title"].toLowerCase().indexOf("workshop") != -1) {
+          type = "Workshop"
         }
         conference["geoLocation"] = new google.maps.LatLng(conference["lat"], conference["lng"]);
         conference["type"] = type;

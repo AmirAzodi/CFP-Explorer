@@ -15,7 +15,7 @@ gMapsURL = 'https://maps.googleapis.com/maps/api/geocode/json'
 xpath_for_table = "/html/body/div[4]/center/form/table/tr/td/table/tr"
 conferences = {}
 google_maps_api_key = "AIzaSyAl4FRVY9SvAZKkvxnH3PEm0POBoI6ddJY"
-invalid_locations = ['n/a', 'publication', '', ' ', 'online']
+invalid_locations = ['n/a', 'publication', '', ' ', 'online', 'special issue', 'none']
 
 def parseWikiCFP(OLD_DATASTORE, cat):
   finished = False
@@ -51,32 +51,27 @@ def parseWikiCFP(OLD_DATASTORE, cat):
           conf_date       = cgi.escape(loc_info[0])
           conf_location   = loc_info[1].decode('utf-8')
           conf_submission = cgi.escape(loc_info[2])
-          try:
-            # raise Exception()
-            userdata = {"address": "None"}
-            response = {"status": "None"}
-            if conf_location.lower().strip() not in invalid_locations:
-              userdata = {"address": conf_location.strip(), "key": google_maps_api_key}
-              response = requests.get(gMapsURL, params=userdata)
 
-              if 'OK' == response.json()["status"]:
-                result = response.json()["results"][0]
-                conf_loc_info = result["geometry"]["location"]
-                country = result["formatted_address"][result["formatted_address"].rfind(',')+1:].strip()
-                if '-' in country:
-                  country = country[country.rfind('-')+1:].strip()
-                conference = pSucks(conf_title,conf_full_title,conf_url,conf_date,conf_location,conf_submission,conf_loc_info["lat"],conf_loc_info["lng"],cat,country)
-                print country
-              else:
-                print response.json()
-                raise Exception()
+          conference = pSucks(conf_title, conf_full_title, conf_url, conf_date, conf_location, conf_submission, 0, 0, cat, "Unknown")
+
+          userdata = {"address": "None"}
+          response = {"status": "None"}
+          if conf_location.lower().strip() not in invalid_locations:
+            userdata = {"address": conf_location.strip(), "key": google_maps_api_key}
+            response = requests.get(gMapsURL, params=userdata)
+
+            if 'OK' == response.json()["status"]:
+              result = response.json()["results"][0]
+              conf_loc_info = result["geometry"]["location"]
+              country = result["formatted_address"][result["formatted_address"].rfind(',')+1:].strip()
+              if '-' in country:
+                country = country[country.rfind('-')+1:].strip()
+              if conf_loc_info["lat"] == 0 and conf_loc_info["lng"] == 0:
+                print ">>>" + conf_title
+              conference = pSucks(conf_title,conf_full_title,conf_url,conf_date,conf_location,conf_submission,conf_loc_info["lat"],conf_loc_info["lng"],cat,country)
+              print country
             else:
-              raise Exception()
-              # raise Exception("Failed to get coordinates for \'" + userdata["address"] + " <><><> " + conf_location + "\', No results returned!")
-          except Exception, e:
-            if e.message:
-              print e
-            conference = pSucks(conf_title, conf_full_title, conf_url, conf_date, conf_location, conf_submission, 0, 0, cat, "Unknown")
+              print response.json()
           conferences[conf_title_key] = conference
       if finished: break
     except Exception, e:

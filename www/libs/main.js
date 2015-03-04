@@ -10,7 +10,8 @@ var icons = {
   OK: 'yellow.png',
   GOOD: 'orange.png',
   TOP: 'green.png',
-  WORKSHOP: 'W.png'
+  WORKSHOP: 'W.png',
+  SYMPOSIUM: 'S.png',
 };
 
 function calendarEvent(title) {
@@ -62,9 +63,11 @@ function makeMarker(conference) {
     info = 'Publisher: Unknown' + '<br>Ranking: Unknown' + '<br>Tier: Unknown';
   }
   if (conference["type"] === "Workshop") {
-      iconType = "WORKSHOP";
-      console.log("HERE");
-    }
+    iconType = "WORKSHOP";
+  }
+  if (conference["type"] === "Symposium") {
+    iconType = "SYMPOSIUM";
+  }
 var contents =
 '<div class="panel panel-default"><div class="panel-heading"><b>'+ conference["title"] +'</b></div>' +
 '<table class="infoboks table table-condensed"><tbody>'+
@@ -125,6 +128,8 @@ function placeMarkers(and) {
               type = "Journal"
             } else if (conference["full_title"].toLowerCase().indexOf("workshop") != -1) {
               type = "Workshop";
+            } else if (conference["full_title"].toLowerCase().indexOf("symposium") != -1) {
+              type = "Symposium";
             }
             conference["geoLocation"] = new google.maps.LatLng(conference["lat"], conference["lng"]);
             conference["type"] = type;
@@ -143,6 +148,8 @@ function placeMarkers(and) {
       type = "Journal"
     } else if (conference["full_title"].toLowerCase().indexOf("workshop") != -1) {
       type = "Workshop"
+    } else if (conference["full_title"].toLowerCase().indexOf("symposium") != -1) {
+      type = "Symposium";
     }
     conference["geoLocation"] = new google.maps.LatLng(conference["lat"], conference["lng"]);
     conference["type"] = type;
@@ -160,6 +167,8 @@ function placeMarkers(and) {
           type = "Journal"
         } else if (conference["full_title"].toLowerCase().indexOf("workshop") != -1) {
           type = "Workshop"
+        } else if (conference["full_title"].toLowerCase().indexOf("symposium") != -1) {
+          type = "Symposium";
         }
         conference["geoLocation"] = new google.maps.LatLng(conference["lat"], conference["lng"]);
         conference["type"] = type;

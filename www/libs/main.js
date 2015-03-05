@@ -262,7 +262,7 @@ function initialize() {
   });
 
   // var mcOptions = {};
-  var mcOptions = {gridSize: 20, maxZoom: 5,zoomOnClick: true,enableRetinaIcons:true};
+  var mcOptions = {gridSize: 10, maxZoom: 5,zoomOnClick: true,enableRetinaIcons:true};
   markerCluster = new MarkerClusterer(map, [], mcOptions);
 
   var iw = new google.maps.InfoWindow();

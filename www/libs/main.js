@@ -208,8 +208,9 @@ function placeMarkers(and) {
       m.setMap(null);
       delete markers[arrayObjectIndexOf(markers, m.title, "title")];
       oms.removeMarker(m);
-      markerCluster.removeMarker(m);
+      // markerCluster.removeMarker(m);
   });
+  markerCluster.resetViewport()
 }
 
 function addToList(conference) {

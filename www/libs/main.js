@@ -124,7 +124,7 @@ function placeMarkers(and) {
           if (!!~db.conferences[key].categories.indexOf(subItem)) {
             conf_location = conference["location"].toLowerCase();
             type = "Conference"
-            if (conf_location === 'n/a' || conf_location === "publication" || conf_location === "online") {
+            if (conf_location === 'n/a' || conf_location === "publication" || conf_location === "online" || conf_location === "special issue") {
               type = "Journal"
             } else if (conference["full_title"].toLowerCase().indexOf("workshop") != -1) {
               type = "Workshop";
@@ -144,7 +144,7 @@ function placeMarkers(and) {
     conference = db.conferences[item.toLowerCase()];
     conf_location = conference["location"].toLowerCase();
     type = "Conference"
-    if (conf_location === 'n/a' || conf_location === "publication" || conf_location === "online") {
+    if (conf_location === 'n/a' || conf_location === "publication" || conf_location === "online" || conf_location === "special issue") {
       type = "Journal"
     } else if (conference["full_title"].toLowerCase().indexOf("workshop") != -1) {
       type = "Workshop"
@@ -163,7 +163,7 @@ function placeMarkers(and) {
       if (conference.country === item) {
         conf_location = conference["location"].toLowerCase();
         type = "Conference"
-        if (conf_location === 'n/a' || conf_location === "publication" || conf_location === "online") {
+        if (conf_location === 'n/a' || conf_location === "publication" || conf_location === "online" || conf_location === "special issue") {
           type = "Journal"
         } else if (conference["full_title"].toLowerCase().indexOf("workshop") != -1) {
           type = "Workshop"

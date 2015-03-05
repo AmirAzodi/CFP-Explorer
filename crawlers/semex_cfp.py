@@ -15,7 +15,8 @@ full_title_re = re.compile(r'<div align="left"(| title=".*?")>(?=.*?<a href)')
 urls_re = re.compile(r'url=(.*?)"')
 conferences = {}
 gMapsURL = 'https://maps.googleapis.com/maps/api/geocode/json'
-google_maps_api_key = "AIzaSyAxQx5RvskYSPxNQzVvhUYe4YRfJFCCEkE"
+# google_maps_api_key = "AIzaSyAxQx5RvskYSPxNQzVvhUYe4YRfJFCCEkE"
+google_maps_api_key = "AIzaSyAl4FRVY9SvAZKkvxnH3PEm0POBoI6ddJY"
 invalid_locations = ['n/a', 'publication', '', ' ', 'online', 'special issue', 'none']
 
 def run(repo, db):
@@ -43,9 +44,9 @@ def run(repo, db):
         if full_title:
             title = full_title[full_title.find('"')+1:full_title.rfind('"')]
         else:
-            title = titles[title_num].replace('\'',' 20').replace('  ', ' ')
-        cfpIdentifier = titles[title_num].replace('\'',' 20').replace('  ', ' ').lower().strip()
-        identifier = titles[title_num][:titles[title_num].find('\'')].lower().strip()
+            title = " ".join(titles[title_num].replace('\'',' 20').split())
+        cfpIdentifier = " ".join(titles[title_num].replace('\'',' 20').lower().split())
+        identifier = " ".join(titles[title_num][:titles[title_num].find('\'')].lower().split())
 
         location = rest[4*title_num]
         publisher = rest[4*title_num+1]
@@ -62,7 +63,7 @@ def run(repo, db):
             cfps[cfpIdentifier]["submission"] = deadline
             cfps[cfpIdentifier]["url"] = url
             cfps[cfpIdentifier]["date"] = "Unknown"
-            cfps[cfpIdentifier]["title"] = titles[title_num].replace('\'',' 20').replace('  ', ' ')
+            cfps[cfpIdentifier]["title"] = " ".join(titles[title_num].replace('\'',' 20').split())
             cfps[cfpIdentifier]["full_title"] = full_title
             cfps[cfpIdentifier]["location"] = location
 

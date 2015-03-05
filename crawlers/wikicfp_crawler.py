@@ -38,7 +38,7 @@ def parseWikiCFP(OLD_DATASTORE, cat):
           break
 
         conf_title = cgi.escape(title_R.search(tr1).group(1)).decode('utf-8')
-        conf_title_key = conf_title.lower().strip()
+        conf_title_key = " ".join(conf_title.lower().split())
         if conf_title_key in conferences.keys():
           if cat not in (conferences[conf_title_key])["categories"]:
             conferences[conf_title_key]["categories"].append(cat)

@@ -19,6 +19,7 @@ invalid_locations = ['n/a', 'publication', '', ' ', 'online', 'special issue', '
 
 def parseWikiCFP(OLD_DATASTORE, cat):
   finished = False
+  gmaps_counter = 0
   print 'crawling ' + cat
   for x in range(1, 10):
     try:
@@ -43,23 +44,33 @@ def parseWikiCFP(OLD_DATASTORE, cat):
           if cat not in (conferences[conf_title_key])["categories"]:
             conferences[conf_title_key]["categories"].append(cat)
         elif conf_title_key in OLD_DATASTORE["conferences"].keys():
-          conferences[conf_title_key] = OLD_DATASTORE["conferences"][conf_title_key]
-        else:
-          conf_full_title = cgi.escape(full_title_R.search(tr1).group(1))
+          conf_full_title = " ".join(cgi.escape(full_title_R.search(tr1).group(1)).split())
           conf_url        = cgi.escape(wikiCFPBaseURL + url_R.search(tr1).group(1))
           loc_info        = conf_info_R.findall(tr2)
           conf_date       = cgi.escape(loc_info[0])
-          conf_location   = loc_info[1].decode('utf-8')
+          conf_location   = " ".join(loc_info[1].decode('utf-8').split())
+          conf_submission = cgi.escape(loc_info[2])
+          old_lat = OLD_DATASTORE["conferences"][conf_title_key]["lat"]
+          old_lng = OLD_DATASTORE["conferences"][conf_title_key]["lng"]
+          old_country = OLD_DATASTORE["conferences"][conf_title_key]["country"]
+          conferences[conf_title_key] = pSucks(conf_title, conf_full_title, conf_url, conf_date, conf_location, conf_submission, old_lat, old_lng, cat, old_country)
+        else:
+          conf_full_title = " ".join(cgi.escape(full_title_R.search(tr1).group(1)).split())
+          conf_url        = cgi.escape(wikiCFPBaseURL + url_R.search(tr1).group(1))
+          loc_info        = conf_info_R.findall(tr2)
+          conf_date       = cgi.escape(loc_info[0])
+          conf_location   = " ".join(loc_info[1].decode('utf-8').split())
           conf_submission = cgi.escape(loc_info[2])
 
           conference = pSucks(conf_title, conf_full_title, conf_url, conf_date, conf_location, conf_submission, 0, 0, cat, "Unknown")
 
           userdata = {"address": "None"}
           response = {"status": "None"}
-          if conf_location.lower().strip() not in invalid_locations:
-            userdata = {"address": conf_location.strip(), "key": google_maps_api_key}
-            response = requests.get(gMapsURL, params=userdata)
+          if conf_location.lower() not in invalid_locations:
 
+            userdata = {"address": conf_location, "key": google_maps_api_key}
+            response = requests.get(gMapsURL, params=userdata)
+            gmaps_counter  += 1
             if 'OK' == response.json()["status"]:
               result = response.json()["results"][0]
               conf_loc_info = result["geometry"]["location"]
@@ -73,7 +84,9 @@ def parseWikiCFP(OLD_DATASTORE, cat):
             else:
               print response.json()
           conferences[conf_title_key] = conference
-      if finished: break
+      if finished:
+        print "number of gmaps requests: " + str(gmaps_counter)
+        break
     except Exception, e:
       print e
 

@@ -4,6 +4,7 @@ var cal;
 var map;
 var markers = [];
 var oms;
+var markerCluster;
 var icons = {
   UNKNOWN: 'pink.png',
   KNOWN: 'blue.png',
@@ -196,6 +197,7 @@ function placeMarkers(and) {
     m.setMap(map);
     markers.push(m);
     oms.addMarker(m);
+    markerCluster.addMarker(m);
   });
 
   markers.filter( function( el ) {
@@ -206,6 +208,7 @@ function placeMarkers(and) {
       m.setMap(null);
       delete markers[arrayObjectIndexOf(markers, m.title, "title")];
       oms.removeMarker(m);
+      markerCluster.removeMarker(m);
   });
 }
 
@@ -250,12 +253,17 @@ function initialize() {
   };
 
   map = new google.maps.Map(mapCanvas, mapOptions)
+
   oms = new OverlappingMarkerSpiderfier(map, {
     keepSpiderfied: true,
     circleSpiralSwitchover: Infinity,
     markersWontMove: true,
     markersWontHide: true
   });
+
+  // var mcOptions = {};
+  var mcOptions = {gridSize: 20, maxZoom: 5,zoomOnClick: true,enableRetinaIcons:true};
+  markerCluster = new MarkerClusterer(map, [], mcOptions);
 
   var iw = new google.maps.InfoWindow();
   oms.addListener('click', function(marker) {

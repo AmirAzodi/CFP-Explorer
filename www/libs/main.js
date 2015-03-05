@@ -200,6 +200,7 @@ function placeMarkers(and) {
     markerCluster.addMarker(m);
   });
 
+  depMarkers = [];
   markers.filter( function( el ) {
     if (el != undefined) {
       return arrayObjectIndexOf(newMarkers, el.title, "title") < 0;
@@ -208,9 +209,9 @@ function placeMarkers(and) {
       m.setMap(null);
       delete markers[arrayObjectIndexOf(markers, m.title, "title")];
       oms.removeMarker(m);
-      // markerCluster.removeMarker(m);
+      depMarkers.push(m);
   });
-  markerCluster.resetViewport()
+  markerCluster.removeMarkers(depMarkers);
 }
 
 function addToList(conference) {

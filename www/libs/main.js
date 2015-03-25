@@ -5,6 +5,12 @@ var map;
 var markers = [];
 var oms;
 var markerCluster;
+var globalMaxDate;
+var globalMinDate;
+var defaultMaxDate;
+var defaultMinDate;
+var selectedStartTime;
+var selectedStopTime;
 var icons = {
   UNKNOWN: 'pink.png',
   KNOWN: 'blue.png',
@@ -14,6 +20,10 @@ var icons = {
   WORKSHOP: 'W.png',
   SYMPOSIUM: 'S.png',
 };
+
+function getToday() {
+  return moment.utc().startOf("day");
+}
 
 function calendarEvent(title) {
   for (var key in db.conferences) {
@@ -134,7 +144,7 @@ function placeMarkers(and) {
             }
             conference["geoLocation"] = new google.maps.LatLng(conference["lat"], conference["lng"]);
             conference["type"] = type;
-            e1List.push(makeMarker(conference));
+            e1List.push(conference);
           }
         }
       });
@@ -154,7 +164,7 @@ function placeMarkers(and) {
     }
     conference["geoLocation"] = new google.maps.LatLng(conference["lat"], conference["lng"]);
     conference["type"] = type;
-    e2List.push(makeMarker(conference));
+    e2List.push(conference);
   });
 
   var e3List = [];
@@ -173,20 +183,57 @@ function placeMarkers(and) {
         }
         conference["geoLocation"] = new google.maps.LatLng(conference["lat"], conference["lng"]);
         conference["type"] = type;
-        e3List.push(makeMarker(conference));
+        e3List.push(conference);
       }
     }
   });
 
   if (and) {
-    newMarkers = e1List.filter( function( el ) {
+    newConfs = e1List.filter( function( el ) {
       if (el != undefined) {
         return arrayObjectIndexOf(e3List, el.title, "title") != -1;
       }
     }).concat(e2List);
   } else {
-    newMarkers = e1List.concat(e2List).concat(e3List);
+    newConfs = e1List.concat(e2List).concat(e3List);
   }
+
+  var newMinDate = undefined;
+  var newMaxDate = undefined;
+
+  if (newConfs.length > 0) {
+    newConfs.forEach(function(item) {
+      if (newMaxDate == undefined || newMaxDate.isBefore(item.submissionDate)) {
+          newMaxDate = item.submissionDate;
+      }
+
+      if (newMinDate == undefined || item.submissionDate.isBefore(newMinDate)) {
+        newMinDate = item.submissionDate;
+      }
+    });
+
+    var currentDate = getToday();
+
+    if (newMinDate.isBefore(currentDate)) {
+      newMinDate = currentDate;
+    }
+
+    if (!globalMinDate.isSame(newMinDate) || !globalMaxDate.isSame(newMaxDate)) {
+      udpateDateSliderRange(newMinDate, newMaxDate);
+    }
+  } else {
+    if (!globalMinDate.isSame(defaultMinDate) || !globalMaxDate.isSame(defaultMaxDate)) {
+      udpateDateSliderRange(defaultMinDate, defaultMaxDate);
+    }
+  }
+
+  newConfs = newConfs.filter(function (el) {
+    return (el.submissionDate.isAfter(selectedStartTime) || el.submissionDate.isAfter(selectedStartTime)) && (el.submissionDate.isBefore(selectedStopTime) || el.submissionDate.isSame(selectedStopTime));
+  });
+
+  newConfs.forEach(function(item) {
+    newMarkers.push(makeMarker(item));
+  });
 
   newMarkers.filter( function( el ) {
     if (el != undefined) {
@@ -245,6 +292,76 @@ function addToList(conference) {
   }
   $("#cool").show();
 }
+
+function updateDateRange(startTime, stopTime) {
+  selectedStartTime = startTime;
+  selectedStopTime = stopTime;
+
+  $("#cool div").empty();
+  if ($('#toAND').is(":checked"))
+  {
+    placeMarkers(true);
+    $("#cool").hide();
+  } else {
+    placeMarkers(false);
+  }
+
+  $("#date_slider_label").text(startTime.format("MMM D YYYY") + "-" + stopTime.format("MMM D YYYY"));
+}
+
+function udpateDateSliderRange(startTime, stopTime) {
+  globalMinDate = startTime;
+  globalMaxDate = stopTime;
+
+  if (defaultMinDate == undefined) {
+    defaultMinDate = globalMinDate;
+    defaultMaxDate = globalMaxDate;
+  }
+
+  var currentDate = getToday();
+
+  var selectionStartTime = startTime;
+  var selectionMaxTime = stopTime;
+
+  if (selectedStopTime != undefined) {
+    if (selectedStopTime.isBefore(selectionMaxTime)) {
+      selectionMaxTime = selectedStopTime;
+    }
+  }
+
+  if (selectedStartTime != undefined) {
+    if (selectedStartTime.isAfter(selectionStartTime)) {
+      selectionStartTime = selectedStartTime;
+    }
+  }
+
+  var startTimeSpan = moment.duration(currentDate.diff(startTime));
+  var maxTimeSpan = moment.duration(stopTime.diff(currentDate));
+
+  var selectedStartTimeSpan = moment.duration(selectionStartTime.diff(currentDate));
+  var selectedMaxTimeSpan = moment.duration(selectionMaxTime.diff(currentDate));
+
+  $("#date_slider").slider({
+      range: true,
+      min: 0,
+      max: maxTimeSpan.asDays() ,
+      values: [ selectedStartTimeSpan.asDays(), selectedMaxTimeSpan.asDays() ],
+      slide: function( event, ui ) {
+        var start = ui.values[0];
+        var stop = ui.values[1];
+        var startTime = getToday();
+        var stopTime = getToday();
+
+        startTime = startTime.add(start, 'days');
+        stopTime = stopTime.add(stop, 'days');
+
+        updateDateRange(startTime, stopTime);
+      }
+    });
+
+    updateDateRange(selectionStartTime, selectionMaxTime);
+}
+
 function initialize() {
   var mapCanvas = document.getElementById('map_canvas');
   var mapOptions = {
@@ -315,6 +432,7 @@ $(document).ready(function() {
     countrySelector = $("#e3");
     var listOfCountries = [];
     var count = 0;
+
     for (var key in db.conferences) {
       selector2.append(new Option(db.conferences[key].title, db.conferences[key].title));
       count = count + 1;
@@ -322,7 +440,30 @@ $(document).ready(function() {
       if (country != undefined && country != "Unknown" ) {
         listOfCountries.push(country);
       }
+
+      var submissionDate = moment.utc(db.conferences[key].submission, "MMM D, YYYY");
+      var minDate;
+      var maxDate;
+
+      db.conferences[key].submissionDate = submissionDate;
+
+      if (maxDate == undefined || maxDate.isBefore(submissionDate)) {
+        maxDate = submissionDate;
+      }
+
+      if (minDate == undefined || submissionDate.isBefore(minDate)) {
+        minDate = submissionDate;
+      }
     }
+
+    var currentDate = getToday();
+
+    if (minDate.isBefore(currentDate)) {
+      minDate = currentDate;
+    }
+
+    udpateDateSliderRange(minDate, maxDate);
+
     listOfCountries.filter(onlyUnique).forEach(function(country) {
       countrySelector.append(new Option(country, country));
     });

@@ -63,3 +63,16 @@ html, body {
 .checkbox {
   padding-top: 5px !important;
 }
+
+.row {
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.options-row {
+  padding-top: 10px;
+}
+
+#time-range-label {
+  color: black;
+}

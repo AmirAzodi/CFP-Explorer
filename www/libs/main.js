@@ -306,7 +306,7 @@ function updateDateRange(startTime, stopTime) {
     placeMarkers(false);
   }
 
-  $("#date_slider_label").text(startTime.format("MMM D YYYY") + "-" + stopTime.format("MMM D YYYY"));
+  $("#date_slider_label").text(startTime.format("MMM D YYYY") + " - " + stopTime.format("MMM D YYYY"));
 }
 
 function udpateDateSliderRange(startTime, stopTime) {

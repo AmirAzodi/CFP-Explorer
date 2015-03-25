@@ -65,12 +65,12 @@ html, body {
 }
 
 .row {
-  padding-left: 5px;
-  padding-right: 5px;
+  padding-left: 5px !important;
+  padding-right: 5px !important;
 }
 
 .options-row {
-  padding-top: 10px;
+  padding-top: 10px !important;
 }
 
 #time-range-label {

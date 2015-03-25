@@ -54,4 +54,4 @@ docs/_build/
 target/
 
 # Data Files
-db.json
+www/db.json

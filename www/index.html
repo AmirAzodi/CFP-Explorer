@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="libs/select2/select2.css">
     <link rel="stylesheet" href="libs/select2-bootstrap.css">
     <link rel="stylesheet" href="libs/fancybox/jquery.fancybox.css">
+    <link rel="stylesheet" href="libs/jquery-ui.min.css">
     <link rel="stylesheet" href="libs/main.css">
   </head>
   <body>
@@ -26,16 +27,23 @@
           </button>
           <a class="navbar-brand" href="javascript:void(0)">Conference Explorer</a>
         </div>
+        
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-              <select multiple id="e1"></select>
-              <select multiple id="e2"></select>
-              <select multiple id="e3"></select>
-              <ul class="nav navbar-nav navbar-right">
-                <li><a>Conferences: <span id="conference_count"></span></a></li>
-                <li><a>Updated: <span id="last_updated"></span></a></li>
-                <li><a>AND <input type="checkbox" id="toAND"></a></li>
-                <li><a id="inline-faq" href="javascript:void(0)"><u>FAQ</u></a></li>
-              </ul>
+          <div class="row">
+            <select multiple id="e1"></select>
+            <select multiple id="e2"></select>
+            <select multiple id="e3"></select>
+          </div>
+          <div class="row">
+            <div class="col-md-7" id="date_slider"></div>
+            <ul class="col-md-5 nav navbar-nav navbar-right" style="min-width:680px;">
+              <li><a><span id="date_slider_label"></span></a></li>
+              <li><a>Conferences: <span id="conference_count"></span></a></li>
+              <li><a>Updated: <span id="last_updated"></span></a></li>
+              <li><a>AND <input type="checkbox" id="toAND"></a></li>
+              <li><a id="inline-faq" href="javascript:void(0)"><u>FAQ</u></a></li>
+            </ul>
+          </div>
         </div>
       </div>
     </nav>
@@ -59,5 +67,8 @@
   <script src="libs/fancybox/jquery.fancybox.pack.js"></script>
   <script src="libs/ics.deps.min.js"></script>
   <script src="libs/ics.min.js"></script>
+  <script src="libs/moment.min.js"></script>
+  <script src="libs/moment-timezone.min.js"></script>
+  <script src="libs/jquery-ui.min.js"></script>
   <script src="libs/main.js"></script>
 </html>

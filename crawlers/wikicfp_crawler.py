@@ -93,7 +93,7 @@ def parseWikiCFP(OLD_DATASTORE, cat):
 def pSucks(conf_title,conf_full_title,conf_url,conf_date,conf_location,conf_submission,lat,lng, category, country):
   confDict = {}
   confDict["title"] = conf_title
-  confDict["full_title"] = conf_full_title
+  confDict["full_title"] = conf_full_title.replace('title=\"','').replace('\"','')
   confDict["url"] = conf_url
   confDict["date"] = conf_date
   confDict["location"] = conf_location

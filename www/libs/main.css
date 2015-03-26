@@ -63,3 +63,21 @@ html, body {
 .checkbox {
   padding-top: 5px !important;
 }
+
+.row {
+  padding-left: 5px !important;
+  padding-right: 5px !important;
+}
+
+.options-row {
+  padding-top: 10px !important;
+}
+
+#time-range-label {
+  color: black;
+}
+#date_slider {
+  margin-top: 10px;
+  margin-left: 10px;
+  margin-right: 10px;
+}

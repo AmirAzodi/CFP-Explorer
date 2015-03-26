@@ -124,7 +124,7 @@ var contents =
 }
 
 function placeMarkers(and) {
-  newMarkers = [];
+  var newMarkers = [];
   var type;
   var e1List = [];
 
@@ -232,7 +232,9 @@ function placeMarkers(and) {
   });
 
   newConfs.forEach(function(item) {
-    newMarkers.push(makeMarker(item));
+    if (arrayObjectIndexOf(newMarkers, item.title.trim().toLowerCase(), "title") == -1) {
+      newMarkers.push(makeMarker(item));
+    }
   });
 
   newMarkers.filter( function( el ) {

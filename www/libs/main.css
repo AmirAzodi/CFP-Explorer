@@ -11,7 +11,7 @@ html, body {
 }
 
 .select2-container {
-  min-width: 300px;
+  min-width: 170px;
   margin-top: 8px;
 }
 
@@ -65,7 +65,7 @@ html, body {
 }
 
 #date_slider{
-  min-width: 380px;
+  min-width: 280px;
   margin-top: 20px;
   margin-left: 10px;
   margin-right: 10px;
@@ -74,8 +74,4 @@ html, body {
 .options-row {
   min-height: 50px;
   height: 100px;
-}
-
-#time-range-label {
-  color: black;
 }

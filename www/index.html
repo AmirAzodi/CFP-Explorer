@@ -29,21 +29,20 @@
         </div>
 
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-          <div class="row">
-            <select multiple id="e1"></select>
-            <select multiple id="e2"></select>
-            <select multiple id="e3"></select>
-          </div>
-          <div class="row options-row">
-            <div id="date_slider"></div>
+
+          <ul class="nav navbar-nav navbar-left">
+            <li><select multiple id="e1"></select></li>
+            <li><select multiple id="e2"></select></li>
+            <li><select multiple id="e3"></select></li>
+            <li><a><input type="checkbox" id="toAND">&nbsp;(AND)</a></li>
+          </ul>
             <ul class="nav navbar-nav navbar-right">
-              <li><a><input type="checkbox" id="toAND">&nbsp;AND</a></li>
-              <li><a id="time-range-label">Time Range:&nbsp;<span id="date_slider_label"></span></a></li>
+              <li><a>Date:&nbsp;<span id="date_slider_label"></span></a></li>
+              <li><div id="date_slider"></div></li>
               <li><a>Conferences:&nbsp;<span id="conference_count"></span></a></li>
               <li><a>Updated:&nbsp;<span id="last_updated"></span></a></li>
               <li><a id="inline-faq" href="javascript:void(0)"><u>FAQ</u></a></li>
             </ul>
-          </div>
         </div>
       </div>
     </nav>

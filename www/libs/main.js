@@ -228,7 +228,7 @@ function placeMarkers(and) {
   }
 
   newConfs = newConfs.filter(function (el) {
-    return (el.submissionDate.isAfter(selectedStartTime) || el.submissionDate.isAfter(selectedStartTime)) && (el.submissionDate.isBefore(selectedStopTime) || el.submissionDate.isSame(selectedStopTime));
+    return (el.submissionDate.isAfter(selectedStartTime) || el.submissionDate.isSame(selectedStartTime)) && (el.submissionDate.isBefore(selectedStopTime) || el.submissionDate.isSame(selectedStopTime));
   });
 
   newConfs.forEach(function(item) {

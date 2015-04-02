@@ -55,7 +55,7 @@ def run(repo, db):
         url = urls[title_num]
         if cfpIdentifier in cfps.keys():
             if len(cfps[cfpIdentifier]["full_title"])<len(title):
-                cfps[cfpIdentifier]["full_title"] = title
+                cfps[cfpIdentifier]["full_title"] = title.replace('title=\"','').replace('\"','')
             #print "FOUND %s " % cfpIdentifier
         else:
             confDict = {}
@@ -64,7 +64,7 @@ def run(repo, db):
             cfps[cfpIdentifier]["url"] = url
             cfps[cfpIdentifier]["date"] = "Unknown"
             cfps[cfpIdentifier]["title"] = " ".join(titles[title_num].replace('\'',' 20').split())
-            cfps[cfpIdentifier]["full_title"] = full_title
+            cfps[cfpIdentifier]["full_title"] = full_title.replace('title=\"','').replace('\"','')
             cfps[cfpIdentifier]["location"] = location
 
             cfps[cfpIdentifier]["lat"] = 0
@@ -88,7 +88,7 @@ def run(repo, db):
         if identifier in conferences.keys():
             #print "FOUND %s " % identifier
             if len(conferences[identifier]["full_title"])<len(title):
-                conferences[identifier]["full_title"] = title
+                conferences[identifier]["full_title"] = title.replace('title=\"','').replace('\"','')
             if conferences[identifier]["tier"] == "None":
                 conferences[identifier]["tier"] = rank
             if conferences[identifier]["type"] == "None":
@@ -97,7 +97,7 @@ def run(repo, db):
         else:
             confDict = {}
             confDict["ranking"] = 'Unknown'
-            confDict["full_title"] = title
+            confDict["full_title"] = title.replace('title=\"','').replace('\"','')
             confDict["type"] = publisher
             confDict["tier"] = rank
             conferences[identifier] = confDict

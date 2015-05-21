@@ -128,7 +128,7 @@ function placeMarkers(and) {
   var type;
   var e1List = [];
 
-  if (markerCluster === undefined) {
+  if (typeof markerCluster === 'undefined') {
     return;
   }
 

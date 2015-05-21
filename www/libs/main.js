@@ -128,6 +128,10 @@ function placeMarkers(and) {
   var type;
   var e1List = [];
 
+  if (markerCluster === undefined) {
+    return;
+  }
+
   $("#e1").select2("val").forEach(function(item) {
       item.split(',').forEach(function(subItem) {
         for (var key in db.conferences) {

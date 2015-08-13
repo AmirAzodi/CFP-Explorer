@@ -1,8 +1,8 @@
-PhD Mate
+Conference Explorer
 =======
-####(Also know as Conference Explorer)
+* Visualizing hundreds of upcomming Call For Papers (CFP) extracted from multiple sources
+* Only shows those CFP where the submission deadline has not passed already
+* Updated daily
 
-
-* Visualizing call for papers from Multiple sources
-* Only showing cfps if the submission deadline hasn't passed.
-* Updated daily.
+####Demo: 
+* https://sec.hpi.de/ce

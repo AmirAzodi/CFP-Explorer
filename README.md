@@ -1,5 +1,6 @@
-Conference Explorer
+Call For Papers (CFP) Explorer
 =======
+(also known as Conference Explorer)
 
 ####What is is?
 * Visualizes hundreds of upcoming Call For Papers (CFP) extracted from multiple sources

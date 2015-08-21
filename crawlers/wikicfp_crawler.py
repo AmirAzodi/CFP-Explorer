@@ -38,6 +38,21 @@ def parseWikiCFP(OLD_DATASTORE, cat):
           finished = True
           break
 
+        try:
+          submission_date = cgi.escape(conf_info_R.findall(tr2)[2])
+          m = p.match(submission_date)
+          if m is not None:
+            year =  m.group('year')
+          else:
+            year = parser.parse(submission_date).year
+
+          if int(year) > datetime.datetime.now().year + 1:
+            raise ValueError('A very specific bad thing happened')
+            
+        except ValueError:
+          print 'Bad submission_date: \"' + submission_date + '\"'
+          continue
+
         conf_title = cgi.escape(title_R.search(tr1).group(1)).decode('utf-8')
         conf_title_key = " ".join(conf_title.lower().split())
         if conf_title_key in conferences.keys():

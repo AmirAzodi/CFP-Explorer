@@ -3,6 +3,7 @@ from scrapy.http import HtmlResponse
 import re, json
 import cgi
 import datetime
+from dateutil import parser
 
 categories_file_loc = "categories.json"
 title_R      = re.compile(r'<a.*>(.*?)</a>', re.U)
@@ -48,7 +49,7 @@ def parseWikiCFP(OLD_DATASTORE, cat):
 
           if int(year) > datetime.datetime.now().year + 1:
             raise ValueError('A very specific bad thing happened')
-            
+
         except ValueError:
           print 'Bad submission_date: \"' + submission_date + '\"'
           continue

@@ -5,6 +5,7 @@ import cgi
 import datetime
 from dateutil import parser
 
+year_pattern = re.compile(r'.*?(?P<year>\d{4})\)?$')
 categories_file_loc = "categories.json"
 title_R      = re.compile(r'<a.*>(.*?)</a>', re.U)
 full_title_R = re.compile(r'<td align="left" colspan="3">(.*?)</td>', re.U)
@@ -41,7 +42,7 @@ def parseWikiCFP(OLD_DATASTORE, cat):
 
         try:
           submission_date = cgi.escape(conf_info_R.findall(tr2)[2])
-          m = p.match(submission_date)
+          m = year_pattern.match(submission_date)
           if m is not None:
             year =  m.group('year')
           else:

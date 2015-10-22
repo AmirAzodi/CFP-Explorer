@@ -1,24 +1,80 @@
+@import url(https://fonts.googleapis.com/css?family=Gloria+Hallelujah);
+
 html, body {
-  height:100%;
-  width:100%;
-  overflow: hidden;
-  font-size: 12px;
-}
-
-.navbar {
-  margin-bottom: 0px !important;
-  background-color: rgba(255,192,203,0.8);
-  border: none;
-}
-
-.select2-container {
-  min-width: 170px;
-  margin-top: 8px;
-}
-
-#map_canvas {
-  width: 100%;
   height: 100%;
+  width: 100%;
+  overflow: hidden;
+  margin:0;padding:0;
+}
+
+.btn-default {
+  margin-right: 5px;
+}
+
+.navbar .navbar-nav {
+  display: inline-block;
+  float: none;
+  vertical-align: top;
+  margin-bottom: 0px;
+}
+
+.leaflet-popup-close-button+.leaflet-popup-content-wrapper .leaflet-popup-content {
+  padding: 0px 0px 0px 0px;
+}
+
+.navbar-btn {
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.leaflet-popup-content-wrapper {
+  padding: 0px;
+}
+
+.leaflet-popup-content {
+  padding: 0px 0px 0px 0px;
+}
+
+.navbar-default, .navbar-collapse {
+  border-radius: 0px;
+  border: 0px;
+  z-index: 1000;
+  text-align: center;
+}
+
+#open_street_map {
+    display: block;
+    position:absolute;
+    height:auto;
+    bottom:0;
+    top:0;
+    left:0;
+    right:0;
+    margin-top:50px; /* adjust top margin to your header height */
+}
+
+.form-group {
+  margin-bottom: 0px;
+}
+
+.navbar-default .navbar-nav>li>a {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.checkbox {
+  margin-bottom: 0px;
+}
+
+.datapickerform, .select2, .select2-container, .select2-search, .select2-search__field, .select2-selection, .select2-selection--multiple {
+  width: 200px !important;
+}
+
+.navbar-brand {
+  font-family: 'Gloria Hallelujah', cursive;
+  font-size: 18px;
 }
 
 #cool {
@@ -26,53 +82,54 @@ html, body {
   max-height: 300px;
   display: none;
   padding: 2px;
-  opacity: 0.9;
-  background-color: rgba(255,192,203,0.8);
-  position:absolute;
-  bottom:0;
-  left:0;
+  border: 2px solid #F8F8F8;
+  /*opacity: 0.9;*/
+  background-color: #F8F8F8;
+  position: absolute;
+  z-index: 1000;
+  border-radius: 5px;
+  bottom: 5px;
+  left: 5px;
   margin: 0;
   overflow: scroll;
   font-weight: 200 !important;
+  visibility: hidden;
+}
+
+#cool2 {
+  max-width: 250px;
+  padding: 1px 5px 0px 5px;
+  font-size: 12px;
+  background-color: rgba(255,255,255,.5);
+  position: absolute;
+  opacity: 0.8;
+  z-index: 1000;
+  bottom: 20px;
+  right: 0px;
+  margin: 0;
+  overflow: scroll;
 }
 
 .list-group-item {
   font-weight: 200;
 }
-
 #cboxClose {
   top: 0;
   right: 0;
   bottom: auto;
 }
-
 #listClose {
-  top:0;
-  right: 0;
+  top: 3px;
+  right: 4px;
   position: absolute;
 }
-
 .panel {
   margin-bottom: 0px;
   max-width: 300px !important;
 }
-
 .ik {
   font-weight: bold;
 }
-
 .checkbox {
   padding-top: 5px !important;
-}
-
-#date_slider{
-  min-width: 280px;
-  margin-top: 20px;
-  margin-left: 10px;
-  margin-right: 10px;
-}
-
-.options-row {
-  min-height: 50px;
-  height: 100px;
 }

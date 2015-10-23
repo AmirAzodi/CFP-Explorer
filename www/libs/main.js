@@ -298,16 +298,19 @@ function init() {
 }
 
 $(document).ready(function() {
-
+  var currentDateFormatted = moment().format("MMM D, YYYY");
+  var inOneYearDateFormatted = moment().add(1, 'years').format("MMM D, YYYY");
   daterangepicker = $('input[name="daterange"]').daterangepicker(
   {
-      locale: {
+      "locale": {
         format: 'MMM D, YYYY'
       },
-      "autoApply": true,
+      // "autoApply": true,
       "opens": "left",
-      startDate: moment().format("MMM D, YYYY"),
-      endDate: moment().add(1, 'years').format("MMM D, YYYY"),
+      "minDate": currentDateFormatted,
+      "maxDate": inOneYearDateFormatted,
+      "startDate": currentDateFormatted,
+      "endDate": inOneYearDateFormatted
   },
   function(start, end, label) {
       if ($('#toAND').is(":checked")) {

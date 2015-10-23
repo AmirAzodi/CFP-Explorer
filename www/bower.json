@@ -21,7 +21,6 @@
   "dependencies": {
     "font-awesome": "~4.4.0",
     "bootstrap": "~3.3.5",
-    "eonasdan-bootstrap-datetimepicker": "~4.17.37",
     "fancybox": "~2.1.5",
     "awesome-bootstrap-checkbox": "~0.3.5",
     "leaflet.markercluster": "~0.4.0",
@@ -29,6 +28,7 @@
     "javascript-detect-element-resize": "~0.5.3",
     "mapbox.js": "~2.2.1",
     "select2-bootstrap-theme": "~0.1.0-beta.4",
-    "select2": "~4.0.0"
+    "select2": "~4.0.0",
+    "bootstrap-daterangepicker": "~2.1.13"
   }
 }

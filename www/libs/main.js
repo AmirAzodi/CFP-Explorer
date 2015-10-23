@@ -9,6 +9,8 @@ var Lmarkers = L.markerClusterGroup({
   zoomToBoundsOnClick: true
 });
 
+var daterangepicker;
+
 var icons = {
   UNKNOWN: ['c','#FF7468'],
   KNOWN: ['c','#9079FC'],
@@ -18,8 +20,6 @@ var icons = {
   WORKSHOP: ['w','#BCBCBC'],
   SYMPOSIUM: ['s','#8FBBE4']
 };
-
-
 
 window.addEventListener("beforeunload", function (e) {
     var confirmationMessage = 'Warning: If you leave this page, your CFP searches will be lost.';
@@ -221,18 +221,14 @@ function placeMarkers(and) {
     newConfs = e1List.concat(e2List).concat(e3List);
   }
 
-
-  var selectedDate = $('#datetimepicker').data("date");
-  if (selectedDate != undefined && selectedDate != "" ) {
-    selectedDate = moment.utc(selectedDate, "MMM D, YYYY");
-  } else {
-    selectedDate = moment.utc("Jan 1, 2020", "MMM D, YYYY");
-  }
+  var startDate = daterangepicker.data('daterangepicker').startDate;
+  var endDate = daterangepicker.data('daterangepicker').endDate;
 
   newConfs.forEach(function(item) {
     if (arrayObjectIndexOfwithOptions(newMarkers, item.title.trim().toLowerCase(), "title") == -1) {
       var submissionDate = moment.utc(item.submission, "MMM D, YYYY");
-      if (submissionDate.isBefore(selectedDate) || submissionDate.isSame(selectedDate)) {
+      if ((submissionDate.isAfter(startDate) || submissionDate.isSame(startDate))
+        && (submissionDate.isBefore(endDate) || submissionDate.isSame(endDate))) {
         newMarkers.push(makeMarker(item));
       }
     }
@@ -303,18 +299,23 @@ function init() {
 
 $(document).ready(function() {
 
-  $('#datetimepicker').datetimepicker({
-    // defaultDate: "Jan 1, 2020",
-    format: 'MMM D, YYYY'
-  });
-
-  $("#datetimepicker").on("dp.change", function (e) {
-    if ($('#toAND').is(":checked")) {
-      placeMarkers(true);
-      $("#cool").hide();
-    } else {
-      placeMarkers(false);
-    }
+  daterangepicker = $('input[name="daterange"]').daterangepicker(
+  {
+      locale: {
+        format: 'MMM D, YYYY'
+      },
+      "autoApply": true,
+      "opens": "left",
+      startDate: moment().format("MMM D, YYYY"),
+      endDate: moment().add(1, 'years').format("MMM D, YYYY"),
+  },
+  function(start, end, label) {
+      if ($('#toAND').is(":checked")) {
+        placeMarkers(true);
+        $("#cool").hide();
+      } else {
+        placeMarkers(false);
+      }
   });
 
   $("#inline-faq").click(function() {

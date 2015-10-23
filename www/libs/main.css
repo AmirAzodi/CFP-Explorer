@@ -1,82 +1,72 @@
 @import url(https://fonts.googleapis.com/css?family=Gloria+Hallelujah);
-
 html, body {
   height: 100%;
   width: 100%;
   overflow: hidden;
-  margin:0;padding:0;
+  margin: 0;
+  padding: 0;
 }
-
+.form-control {
+  width: 200px;
+}
 .btn-default {
   margin-right: 5px;
 }
-
 .navbar .navbar-nav {
   display: inline-block;
   float: none;
   vertical-align: top;
   margin-bottom: 0px;
 }
-
 .leaflet-popup-close-button+.leaflet-popup-content-wrapper .leaflet-popup-content {
   padding: 0px 0px 0px 0px;
 }
-
 .navbar-btn {
   padding-left: 5px;
   padding-right: 5px;
 }
-
 .leaflet-popup-content-wrapper {
   padding: 0px;
 }
-
 .leaflet-popup-content {
   padding: 0px 0px 0px 0px;
 }
-
 .navbar-default, .navbar-collapse {
   border-radius: 0px;
   border: 0px;
   z-index: 1000;
   text-align: center;
 }
-
 #open_street_map {
-    display: block;
-    position:absolute;
-    height:auto;
-    bottom:0;
-    top:0;
-    left:0;
-    right:0;
-    margin-top:50px; /* adjust top margin to your header height */
+  display: block;
+  position: absolute;
+  height: auto;
+  bottom: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  margin-top: 50px;
+  /* adjust top margin to your header height */
 }
-
 .form-group {
   margin-bottom: 0px;
 }
-
 .navbar-default .navbar-nav>li>a {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
   padding-right: 5px;
 }
-
 .checkbox {
   margin-bottom: 0px;
 }
-
 .datapickerform, .select2, .select2-container, .select2-search, .select2-search__field, .select2-selection, .select2-selection--multiple {
   width: 200px !important;
 }
-
 .navbar-brand {
   font-family: 'Gloria Hallelujah', cursive;
   font-size: 18px;
 }
-
 #cool {
   max-width: 200px;
   max-height: 300px;
@@ -95,12 +85,11 @@ html, body {
   font-weight: 200 !important;
   visibility: hidden;
 }
-
 #cool2 {
   max-width: 250px;
   padding: 1px 5px 0px 5px;
   font-size: 12px;
-  background-color: rgba(255,255,255,.5);
+  background-color: rgba(255, 255, 255, .5);
   position: absolute;
   opacity: 0.8;
   z-index: 1000;
@@ -109,7 +98,6 @@ html, body {
   margin: 0;
   overflow: scroll;
 }
-
 .list-group-item {
   font-weight: 200;
 }
@@ -124,6 +112,7 @@ html, body {
   position: absolute;
 }
 .panel {
+  order: none;
   margin-bottom: 0px;
   max-width: 300px !important;
 }

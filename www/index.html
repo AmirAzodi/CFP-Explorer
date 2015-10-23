@@ -7,8 +7,8 @@
   <meta charset="utf-8">
   <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css">
-  <link rel="stylesheet" href="bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css">
-  <link rel="stylesheet" href="bower_components/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css">
+  <link rel="stylesheet" href="bower_components/bootstrap-daterangepicker/daterangepicker.css">
+  <!-- <link rel="stylesheet" href="bower_components/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css"> -->
   <link rel="stylesheet" href="bower_components/select2/dist/css/select2.min.css">
   <link rel="stylesheet" href="bower_components/select2-bootstrap-theme/dist/select2-bootstrap.min.css">
   <link rel="stylesheet" href="bower_components/fancybox/source/jquery.fancybox.css">
@@ -32,8 +32,6 @@
             </button>
             <ul class="dropdown-menu pull-right">
               <li><a href="#"><input class=".checkbox-primary" type="checkbox" id="toAND">&nbsp;&nbsp;Logical AND</a></li>
-              <!-- <li><a href="#"><input class=".checkbox-primary" type="checkbox">&nbsp;&nbsp;Hide Workshops</a></li>
-              <li><a href="#"><input class=".checkbox-primary" type="checkbox">&nbsp;&nbsp;Hide Symposiums</a></li> -->
               <li><a href="#"><input id="hide-list" class=".checkbox-primary" type="checkbox" checked>&nbsp;&nbsp;Hide List</a></li>
             </ul>
           </li>
@@ -45,26 +43,13 @@
           <span class="icon-bar"></span>
         </button>
       </div>
-      <div class="visible-xs-block clearfix"></div>
       <div class="collapse navbar-collapse">
         <ul class="nav navbar-nav">
           <li><a><select multiple="multiple" id="e1"></select></a></li>
           <li><a><select multiple="multiple" id="e2"></select></a></li>
           <li><a><select multiple="multiple" id="e3"></select></a></li>
-          <li>
-            <a>
-              <div class="form-group datapickerform">
-                <div class='input-group date' id='datetimepicker'>
-                  <input placeholder="Submission Deadline" type='text' class="form-control" />
-                  <span class="input-group-addon">
-                    <span class="glyphicon glyphicon-calendar"></span>
-                  </span>
-                </div>
-              </div>
-            </a>
-          </li>
+          <li><a title="Conference submission deadline"><input class="form-control" type="text" name="daterange" value="01/01/2015 - 01/31/2015" /></a></li>
         </ul>
-        <!-- <ul class="nav navbar-nav navbar-right"></ul> -->
       </div>
     </div>
   </nav>
@@ -85,7 +70,7 @@
 <script src="bower_components/jquery/dist/jquery.min.js"></script>
 <script src="bower_components/moment/min/moment-with-locales.min.js"></script>
 <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-<script src="bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
+<script src="bower_components/bootstrap-daterangepicker/daterangepicker.js"></script>
 <script src="bower_components/select2/dist/js/select2.full.min.js"></script>
 <script src="bower_components/javascript-detect-element-resize/jquery.resize.js"></script>
 <script src="bower_components/mapbox.js/mapbox.js"></script>
